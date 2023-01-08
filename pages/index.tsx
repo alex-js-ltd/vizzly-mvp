@@ -10,17 +10,17 @@ const BarChart = dynamic(() => import('../comps/chart'), {
 });
 
 export default function Home() {
-  const { category, yaxis, aggregate, chartType } = useInput();
-  const { data, categories, isError, error, isLoading } = useOrders(
-    category,
-    yaxis,
+  const { dimension, measure, aggregate, chartType } = useInput();
+  const { data, dimensions, isError, error, isLoading } = useOrders(
+    dimension,
+    measure,
     aggregate,
     chartType
   );
 
   return (
     <>
-      <BarChart data={data} categories={categories} chartType={chartType} />
+      <BarChart data={data} dimensions={dimensions} chartType={chartType} />
 
       {isError ? (
         <div css={{ color: colors.danger }}>

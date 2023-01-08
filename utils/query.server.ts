@@ -3,21 +3,19 @@ import type { Order } from '@prisma/client';
 
 const Query: QueryResolvers = {
   orders: async (_parent, args, ctx) => {
-    const { xaxis, yaxis, aggregate } = args;
+    const { dimension, measure, aggregate } = args;
 
     const orders = await ctx.prisma.order.findMany();
 
-    console.log(aggregate);
-
-    return getOrders(orders, xaxis, yaxis, aggregate);
+    return getOrders(orders, dimension, measure, aggregate);
   },
 };
 
 export default Query;
 
-type Categories = { category: string; payment_method: string; month: string };
+type Dimensions = { category: string; payment_method: string; month: string };
 
-export type CatKey = keyof Categories;
+export type DimensionKey = keyof Dimensions;
 
 type Measure = { value: number };
 
@@ -25,33 +23,23 @@ export type MeasureKey = keyof Measure;
 
 const getOrders = (
   orders: Order[],
-  category: CatKey,
-  yaxis: MeasureKey,
+  dimension: DimensionKey,
+  measure: MeasureKey,
   aggregate: string
 ) => {
-  const cat = orders?.map((order) => order[category]);
+  const dim = orders?.map((order) => order[dimension]);
 
-  const categories = cat?.filter((item, index) => cat?.indexOf(item) === index);
+  const dimensions = dim?.filter((item, index) => dim?.indexOf(item) === index);
 
-  let data = [];
+  const data = dimensions.map((d) => {
+    const filter = orders.filter((order) => order[dimension] === d);
 
-  for (const cat of categories) {
-    const filter = orders.filter((order) => order[category] === cat);
-
-    let measure;
-
-    if (aggregate === 'mean') {
-      measure = mean(filter, yaxis);
-    } else {
-      measure = sum(filter, yaxis);
-    }
-
-    data.push(measure);
-  }
+    return aggregate === 'mean' ? mean(filter, measure) : sum(filter, measure);
+  });
 
   return {
     data,
-    categories,
+    dimensions,
   };
 };
 

@@ -47,8 +47,8 @@ export type Order = {
 
 export type OrderResolver = {
   __typename?: 'OrderResolver';
-  categories?: Maybe<Array<Maybe<Scalars['String']>>>;
   data?: Maybe<Array<Maybe<Scalars['Int']>>>;
+  dimensions?: Maybe<Array<Maybe<Scalars['String']>>>;
 };
 
 export type Query = {
@@ -60,8 +60,8 @@ export type Query = {
 export type QueryOrdersArgs = {
   aggregate: Scalars['String'];
   chartType?: InputMaybe<Scalars['String']>;
-  xaxis?: InputMaybe<Scalars['String']>;
-  yaxis?: InputMaybe<Scalars['String']>;
+  dimension?: InputMaybe<Scalars['String']>;
+  measure?: InputMaybe<Scalars['String']>;
 };
 
 
@@ -184,8 +184,8 @@ export type OrderResolvers<ContextType = Context, ParentType extends ResolversPa
 };
 
 export type OrderResolverResolvers<ContextType = Context, ParentType extends ResolversParentTypes['OrderResolver'] = ResolversParentTypes['OrderResolver']> = {
-  categories?: Resolver<Maybe<Array<Maybe<ResolversTypes['String']>>>, ParentType, ContextType>;
   data?: Resolver<Maybe<Array<Maybe<ResolversTypes['Int']>>>, ParentType, ContextType>;
+  dimensions?: Resolver<Maybe<Array<Maybe<ResolversTypes['String']>>>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 

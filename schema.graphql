@@ -29,8 +29,8 @@ type Order {
 
 type Query {
   orders(
-    xaxis: String
-    yaxis: String
+    dimension: String
+    measure: String
     aggregate: String!
     chartType: String
   ): OrderResolver
@@ -38,5 +38,5 @@ type Query {
 
 type OrderResolver {
   data: [Int]
-  categories: [String]
+  dimensions: [String]
 }

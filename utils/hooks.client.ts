@@ -1,47 +1,47 @@
 import { req } from './request.client';
 import { useQuery } from '@tanstack/react-query';
 import { graphql } from 'generated/gql';
-import { ChartType, Category, Yaxis } from 'comps/layout';
+import { ChartType, Dimension, Measure } from 'comps/layout';
 
 export { useOrders };
 
 const useOrders = (
-  xaxis: Category,
-  yaxis: Yaxis,
+  dimension: Dimension,
+  measure: Measure,
   aggregate: string,
   chartType: ChartType
 ) => {
   const result = useQuery<
-    { orders: { data: number[]; categories: string[] } },
+    { orders: { data: number[]; dimensions: string[] } },
     Error
   >({
-    queryKey: ['orders', xaxis, yaxis, aggregate, chartType],
+    queryKey: ['orders', dimension, measure, aggregate, chartType],
     queryFn: () =>
-      req(ordersQueryDocument, { xaxis, yaxis, aggregate, chartType }),
+      req(ordersQueryDocument, { dimension, measure, aggregate, chartType }),
   });
 
   return {
     ...result,
     data: result?.data?.orders?.data,
-    categories: result?.data?.orders?.categories,
+    dimensions: result?.data?.orders?.dimensions,
   };
 };
 
 const ordersQueryDocument = graphql(/* GraphQL */ `
   query orders(
-    $xaxis: String
-    $yaxis: String
+    $dimension: String
+    $measure: String
     $aggregate: String!
     $chartType: String
   ) {
     orders(
-      xaxis: $xaxis
-      yaxis: $yaxis
+      dimension: $dimension
+      measure: $measure
       aggregate: $aggregate
       chartType: $chartType
     ) {
       data
-      categories
+      dimensions
     }
   }
 `);

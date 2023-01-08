@@ -1,16 +1,16 @@
 import Chart from 'react-apexcharts';
 import type { ChartType } from './layout';
 
-type Props = { data?: number[]; categories?: string[]; chartType: ChartType };
+type Props = { data?: number[]; dimensions?: string[]; chartType: ChartType };
 
-const BarChart = ({ data, categories, chartType }: Props) => {
-  if (!data || !categories) return null;
+const BarChart = ({ data, dimensions, chartType }: Props) => {
+  if (!data || !dimensions) return null;
   const options = {
     chart: {
       id: 'apexchart-example',
     },
     xaxis: {
-      categories: categories,
+      categories: dimensions,
     },
   };
 

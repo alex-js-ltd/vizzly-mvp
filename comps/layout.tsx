@@ -5,7 +5,6 @@ import {
   ReactNode,
   useContext,
 } from 'react';
-import { Button } from 'comps/lib';
 import * as mq from 'styles/media-queries';
 import * as colors from 'styles/colors';
 
@@ -78,15 +77,15 @@ const Nav = () => {
         <li>
           <form>
             <FormGroup>
-              <Label>X-axis:</Label>
+              <Label>Dimension:</Label>
               <Select
-                id='xaxis'
-                name='xaxis'
-                defaultValue={rest.category}
+                id='dimension'
+                name='dimension'
+                defaultValue={rest.dimension}
                 onChange={(e) =>
                   setInput({
                     ...rest,
-                    category: e.currentTarget.value,
+                    dimension: e.currentTarget.value,
                   })
                 }
               >
@@ -114,15 +113,15 @@ const Nav = () => {
               </Select>
             </FormGroup>
             <FormGroup>
-              <Label>Y-axis:</Label>
+              <Label>Measure:</Label>
               <Select
-                id='yaxis'
-                name='yaxis'
-                defaultValue={rest.yaxis}
+                id='measure'
+                name='measure'
+                defaultValue={rest.measure}
                 onChange={(e) =>
                   setInput({
                     ...rest,
-                    yaxis: e.currentTarget.value,
+                    measure: e.currentTarget.value,
                   })
                 }
               >
@@ -158,13 +157,13 @@ const Nav = () => {
 
 export type ChartType = 'bar' | 'line';
 
-export type Category = 'category' | 'payment_method' | 'month';
+export type Dimension = 'category' | 'payment_method' | 'month';
 
-export type Yaxis = 'value' | 'total' | 'qty_ordered';
+export type Measure = 'value' | 'total' | 'qty_ordered';
 
 type State = {
-  category: Category;
-  yaxis: Yaxis;
+  dimension: Dimension;
+  measure: Measure;
   aggregate: string;
   chartType: ChartType;
 };
@@ -176,15 +175,15 @@ const InputContext = createContext<Context | undefined>(undefined);
 
 const Input = ({ children }: { children: ReactNode }) => {
   const [state, setInput] = useState<State>({
-    category: 'category',
-    yaxis: 'value',
+    dimension: 'category',
+    measure: 'value',
     chartType: 'bar',
     aggregate: 'sum',
   });
 
-  const { category, yaxis, aggregate, chartType } = state;
+  const { dimension, measure, aggregate, chartType } = state;
 
-  const value = { category, yaxis, aggregate, chartType, setInput };
+  const value = { dimension, measure, aggregate, chartType, setInput };
 
   return (
     <InputContext.Provider value={value}>{children}</InputContext.Provider>

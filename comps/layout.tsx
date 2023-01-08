@@ -4,10 +4,13 @@ import {
   useState,
   ReactNode,
   useContext,
+  FormEvent,
 } from 'react';
 import { Button } from 'comps/lib';
 import * as mq from 'styles/media-queries';
 import * as colors from 'styles/colors';
+
+import { FormGroup, Select } from 'comps/lib';
 
 const Layout = ({ children }: { children: ReactElement }) => {
   return (
@@ -50,6 +53,7 @@ export default Layout;
 
 const Nav = () => {
   const { setInput, category, yaxis } = useInput();
+
   return (
     <nav
       css={{
@@ -87,6 +91,24 @@ const Nav = () => {
             Month
           </Button>
         </li>
+
+        <li>
+          <form>
+            <FormGroup>
+              <Select
+                id='yaxis'
+                name='yaxis'
+                onChange={(e) =>
+                  setInput({ category, yaxis: e.currentTarget.value })
+                }
+              >
+                <option value='value'>value</option>
+                <option value='total'>total</option>
+                <option value='qty_ordered'>qty_ordered</option>
+              </Select>
+            </FormGroup>
+          </form>
+        </li>
       </ul>
     </nav>
   );
@@ -114,7 +136,7 @@ const Input = ({ children }: { children: ReactNode }) => {
 export const useInput = () => {
   const context = useContext(InputContext);
   if (context === undefined) {
-    throw new Error(`useInput must be used within a InputContext provider`);
+    throw new Error(`useInput must be used within an InputContext provider`);
   }
   return context;
 };

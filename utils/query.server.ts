@@ -3,19 +3,19 @@ import type { Order } from '@prisma/client';
 
 const Query: QueryResolvers = {
   orders: async (_parent, args, ctx) => {
-    const { xaxis } = args;
+    const { xaxis, yaxis } = args;
 
     const orders = await ctx.prisma.order.findMany();
 
-    return getCategories(orders, xaxis, 'totalValue');
+    return getCategories(orders, xaxis, yaxis);
   },
 };
 
 export default Query;
 
-const sum = (array: Order[]): number => {
+const sum = (array: Order[], yaxis: MeasureKey): number => {
   const sum = array
-    ?.reduce((partialSum, a) => partialSum + Number(a.value), 0)
+    ?.reduce((partialSum, a) => partialSum + Number(a[yaxis]), 0)
     .toFixed(2);
 
   return parseInt(sum);
@@ -23,9 +23,17 @@ const sum = (array: Order[]): number => {
 
 type Categories = { category: string; payment_method: string; month: string };
 
-export type Key = keyof Categories;
+export type CatKey = keyof Categories;
 
-const getCategories = (orders: Order[], category: Key, yaxis: string) => {
+type Measure = { value: number };
+
+export type MeasureKey = keyof Measure;
+
+const getCategories = (
+  orders: Order[],
+  category: CatKey,
+  yaxis: MeasureKey
+) => {
   const cat = orders?.map((order) => order[category]);
 
   const categories = cat?.filter((item, index) => cat?.indexOf(item) === index);
@@ -45,12 +53,12 @@ const getCategories = (orders: Order[], category: Key, yaxis: string) => {
   };
 };
 
-const getMeasure = (filter: Order[], yaxis: string) => {
-  if (yaxis === 'totalValue') {
-    const totalValue = sum(filter);
+const getMeasure = (filter: Order[], yaxis: MeasureKey) => {
+  if (yaxis === 'value') {
+    const totalValue = sum(filter, yaxis);
     return totalValue;
   }
 
-  const totalValue = sum(filter);
+  const totalValue = sum(filter, yaxis);
   return totalValue;
 };

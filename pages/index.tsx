@@ -13,7 +13,7 @@ export default function Home() {
   const { category } = useCategory();
   const { data, categories, isError, error, isLoading } = useOrders(
     category,
-    'totalValue'
+    'value'
   );
   return (
     <>

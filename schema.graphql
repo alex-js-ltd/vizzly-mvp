@@ -28,7 +28,7 @@ type Order {
 }
 
 type Query {
-  orders(xaxis: String): OrderResolver
+  orders(xaxis: String, yaxis: String): OrderResolver
 }
 
 type OrderResolver {

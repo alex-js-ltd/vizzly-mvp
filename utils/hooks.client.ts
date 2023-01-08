@@ -4,13 +4,13 @@ import { graphql } from 'generated/gql';
 
 export { useOrders };
 
-const useOrders = (xaxis: string) => {
+const useOrders = (xaxis: string, yaxis: string) => {
   const result = useQuery<
     { orders: { data: number[]; categories: string[] } },
     Error
   >({
-    queryKey: ['orders', xaxis],
-    queryFn: () => req(ordersQueryDocument, { xaxis }),
+    queryKey: ['orders', xaxis, yaxis],
+    queryFn: () => req(ordersQueryDocument, { xaxis, yaxis }),
   });
 
   return {
@@ -21,8 +21,8 @@ const useOrders = (xaxis: string) => {
 };
 
 const ordersQueryDocument = graphql(/* GraphQL */ `
-  query orders($xaxis: String) {
-    orders(xaxis: $xaxis) {
+  query orders($xaxis: String, $yaxis: String) {
+    orders(xaxis: $xaxis, yaxis: $yaxis) {
       data
       categories
     }

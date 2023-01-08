@@ -58,6 +58,7 @@ export type Query = {
 
 export type QueryOrdersArgs = {
   xaxis?: InputMaybe<Scalars['String']>;
+  yaxis?: InputMaybe<Scalars['String']>;
 };
 
 

@@ -11,7 +11,10 @@ const BarChart = dynamic(() => import('../comps/chart'), {
 
 export default function Home() {
   const { category } = useCategory();
-  const { data, categories, isError, error, isLoading } = useOrders(category);
+  const { data, categories, isError, error, isLoading } = useOrders(
+    category,
+    'totalValue'
+  );
   return (
     <>
       <BarChart data={data} categories={categories} />

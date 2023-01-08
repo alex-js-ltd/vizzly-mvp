@@ -1,0 +1,10 @@
+schema: ./schema.graphql
+generates:
+  ./utils/types.generated.server.ts:
+    plugins:
+      - typescript
+      - typescript-resolvers
+    config:
+      contextType: pages/api/graphql#Context
+      mappers:
+        Order: pages/api/graphql#PrismaOrder

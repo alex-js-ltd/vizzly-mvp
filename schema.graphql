@@ -1,0 +1,37 @@
+type Order {
+  id: Int!
+  order_id: Int!
+  order_date: String!
+  status: String!
+  item_id: Int!
+  sku: String!
+  qty_ordered: Int!
+  price: Float!
+  value: Float!
+  discount_amount: Float!
+  total: Float!
+  category: String!
+  payment_method: String!
+  bi_st: String!
+  cust_id: Int!
+  year: Int!
+  month: String!
+  ref_num: Int!
+  customer_since: String!
+  place_name: String!
+  county: String!
+  city: String!
+  state: String!
+  zip: Int!
+  region: String!
+  discount_percent: Float!
+}
+
+type Query {
+  orders(xaxis: String): OrderResolver
+}
+
+type OrderResolver {
+  data: [Int]
+  categories: [String]
+}

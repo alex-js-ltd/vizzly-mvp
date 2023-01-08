@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE "Order" ALTER COLUMN "discount_amount" SET DATA TYPE DOUBLE PRECISION;

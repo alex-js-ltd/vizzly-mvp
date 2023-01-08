@@ -1,0 +1,41 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider          = "postgresql"
+  url               = env("DATABASE_URL")
+  shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
+}
+
+model Order {
+  id               Int     @id @default(autoincrement())
+  order_id         Int
+  order_date       String
+  status           String
+  item_id          Int
+  sku              String
+  qty_ordered      Int
+  price            Decimal
+  value            Decimal
+  discount_amount  Float
+  total            Decimal
+  category         String
+  payment_method   String
+  bi_st            String
+  cust_id          Int
+  year             Int
+  month            String
+  ref_num          Int
+  customer_since   String
+  place_name       String
+  county           String
+  city             String
+  state            String
+  zip              Int
+  region           String
+  discount_percent Float
+}

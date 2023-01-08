@@ -5,6 +5,7 @@ export type InputMaybe<T> = utils/query.server#Key | T;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
 export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
 export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
+export type RequireFields<T, K extends keyof T> = Omit<T, K> & { [P in K]-?: NonNullable<T[P]> };
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: string;
@@ -57,6 +58,8 @@ export type Query = {
 
 
 export type QueryOrdersArgs = {
+  aggregate: Scalars['String'];
+  chartType?: InputMaybe<Scalars['String']>;
   xaxis?: InputMaybe<Scalars['String']>;
   yaxis?: InputMaybe<Scalars['String']>;
 };
@@ -187,7 +190,7 @@ export type OrderResolverResolvers<ContextType = Context, ParentType extends Res
 };
 
 export type QueryResolvers<ContextType = Context, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
-  orders?: Resolver<Maybe<ResolversTypes['OrderResolver']>, ParentType, ContextType, Partial<QueryOrdersArgs>>;
+  orders?: Resolver<Maybe<ResolversTypes['OrderResolver']>, ParentType, ContextType, RequireFields<QueryOrdersArgs, 'aggregate'>>;
 };
 
 export type Resolvers<ContextType = Context> = {

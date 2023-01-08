@@ -5,13 +5,19 @@ import { ChartType, Category, Yaxis } from 'comps/layout';
 
 export { useOrders };
 
-const useOrders = (xaxis: Category, yaxis: Yaxis, chartType: ChartType) => {
+const useOrders = (
+  xaxis: Category,
+  yaxis: Yaxis,
+  aggregate: string,
+  chartType: ChartType
+) => {
   const result = useQuery<
     { orders: { data: number[]; categories: string[] } },
     Error
   >({
-    queryKey: ['orders', xaxis, yaxis, chartType],
-    queryFn: () => req(ordersQueryDocument, { xaxis, yaxis }),
+    queryKey: ['orders', xaxis, yaxis, aggregate, chartType],
+    queryFn: () =>
+      req(ordersQueryDocument, { xaxis, yaxis, aggregate, chartType }),
   });
 
   return {
@@ -22,8 +28,18 @@ const useOrders = (xaxis: Category, yaxis: Yaxis, chartType: ChartType) => {
 };
 
 const ordersQueryDocument = graphql(/* GraphQL */ `
-  query orders($xaxis: String, $yaxis: String) {
-    orders(xaxis: $xaxis, yaxis: $yaxis) {
+  query orders(
+    $xaxis: String
+    $yaxis: String
+    $aggregate: String!
+    $chartType: String
+  ) {
+    orders(
+      xaxis: $xaxis
+      yaxis: $yaxis
+      aggregate: $aggregate
+      chartType: $chartType
+    ) {
       data
       categories
     }

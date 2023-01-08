@@ -92,6 +92,17 @@ const FormGroup = styled.div({
   flexDirection: 'column',
   justifyContent: 'space-between',
   width: '100%',
+  border: `1px solid ${colors.gray10}`,
+  borderRadius: '3px',
+});
+
+const Label = styled.div({
+  display: 'block',
+  padding: '8px 15px 8px 10px',
+  margin: '5px 0',
+  width: '100%',
+  height: '100%',
+  color: colors.text,
 });
 
 const Input = styled.input({ borderRadius: '3px' }, inputStyles);
@@ -112,6 +123,10 @@ const Select = styled.select({
   backgroundPosition: 'right .7em top 50%, 0',
   backgroundSize: '1em auto, 100%',
   color: colors.text,
+
+  ':hover,:focus': {
+    outline: 0,
+  },
 });
 
 export {
@@ -122,4 +137,5 @@ export {
   FormGroup,
   Input,
   Select,
+  Label,
 };

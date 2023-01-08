@@ -9,7 +9,7 @@ import { Button } from 'comps/lib';
 import * as mq from 'styles/media-queries';
 import * as colors from 'styles/colors';
 
-import { FormGroup, Select } from 'comps/lib';
+import { FormGroup, Select, Label } from 'comps/lib';
 
 const Layout = ({ children }: { children: ReactElement }) => {
   return (
@@ -76,29 +76,49 @@ const Nav = () => {
         }}
       >
         <li>
-          <Button onClick={() => setInput({ ...rest, category: 'category' })}>
-            Category
-          </Button>
-        </li>
-        <li>
-          <Button
-            onClick={() => setInput({ ...rest, category: 'payment_method' })}
-          >
-            Payment Method
-          </Button>
-        </li>
-        <li>
-          <Button onClick={() => setInput({ ...rest, category: 'month' })}>
-            Month
-          </Button>
-        </li>
-
-        <li>
           <form>
             <FormGroup>
+              <Label>X-axis:</Label>
+              <Select
+                id='xaxis'
+                name='xaxis'
+                defaultValue={rest.category}
+                onChange={(e) =>
+                  setInput({
+                    ...rest,
+                    category: e.currentTarget.value,
+                  })
+                }
+              >
+                <option value='category'>category</option>
+                <option value='payment_method'>payment</option>
+                <option value='month'>month</option>
+              </Select>
+            </FormGroup>
+
+            <FormGroup>
+              <Label>Aggregate:</Label>
+              <Select
+                id='aggregate'
+                name='aggregate'
+                defaultValue={rest.aggregate}
+                onChange={(e) =>
+                  setInput({
+                    ...rest,
+                    aggregate: e.currentTarget.value,
+                  })
+                }
+              >
+                <option value='sum'>sum</option>
+                <option value='mean'>mean</option>
+              </Select>
+            </FormGroup>
+            <FormGroup>
+              <Label>Y-axis:</Label>
               <Select
                 id='yaxis'
                 name='yaxis'
+                defaultValue={rest.yaxis}
                 onChange={(e) =>
                   setInput({
                     ...rest,
@@ -106,9 +126,6 @@ const Nav = () => {
                   })
                 }
               >
-                <option value='' selected disabled hidden>
-                  Change Yaxis
-                </option>
                 <option value='value'>value</option>
                 <option value='total'>total</option>
                 <option value='qty_ordered'>qty_ordered</option>
@@ -116,9 +133,11 @@ const Nav = () => {
             </FormGroup>
 
             <FormGroup>
+              <Label>Chart Type:</Label>
               <Select
                 id='chartType'
                 name='chartType'
+                defaultValue={rest.chartType}
                 onChange={(e) =>
                   setInput({
                     ...rest,
@@ -126,9 +145,6 @@ const Nav = () => {
                   })
                 }
               >
-                <option value='' selected disabled hidden>
-                  Change Chart
-                </option>
                 <option value='bar'>bar</option>
                 <option value='line'>line</option>
               </Select>
@@ -146,7 +162,12 @@ export type Category = 'category' | 'payment_method' | 'month';
 
 export type Yaxis = 'value' | 'total' | 'qty_ordered';
 
-type State = { category: Category; yaxis: Yaxis; chartType: ChartType };
+type State = {
+  category: Category;
+  yaxis: Yaxis;
+  aggregate: string;
+  chartType: ChartType;
+};
 
 type Context = State & {
   setInput: Function;
@@ -158,11 +179,12 @@ const Input = ({ children }: { children: ReactNode }) => {
     category: 'category',
     yaxis: 'value',
     chartType: 'bar',
+    aggregate: 'sum',
   });
 
-  const { category, yaxis, chartType } = state;
+  const { category, yaxis, aggregate, chartType } = state;
 
-  const value = { category, yaxis, chartType, setInput };
+  const value = { category, yaxis, aggregate, chartType, setInput };
 
   return (
     <InputContext.Provider value={value}>{children}</InputContext.Provider>

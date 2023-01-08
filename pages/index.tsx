@@ -10,12 +10,14 @@ const BarChart = dynamic(() => import('../comps/chart'), {
 });
 
 export default function Home() {
-  const { category, yaxis, chartType } = useInput();
+  const { category, yaxis, aggregate, chartType } = useInput();
   const { data, categories, isError, error, isLoading } = useOrders(
     category,
     yaxis,
+    aggregate,
     chartType
   );
+
   return (
     <>
       <BarChart data={data} categories={categories} chartType={chartType} />

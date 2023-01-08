@@ -3,23 +3,17 @@ import type { Order } from '@prisma/client';
 
 const Query: QueryResolvers = {
   orders: async (_parent, args, ctx) => {
-    const { xaxis, yaxis } = args;
+    const { xaxis, yaxis, aggregate } = args;
 
     const orders = await ctx.prisma.order.findMany();
 
-    return getCategories(orders, xaxis, yaxis);
+    console.log(aggregate);
+
+    return getOrders(orders, xaxis, yaxis, aggregate);
   },
 };
 
 export default Query;
-
-const sum = (array: Order[], yaxis: MeasureKey): number => {
-  const sum = array
-    ?.reduce((partialSum, a) => partialSum + Number(a[yaxis]), 0)
-    .toFixed(2);
-
-  return parseInt(sum);
-};
 
 type Categories = { category: string; payment_method: string; month: string };
 
@@ -29,10 +23,11 @@ type Measure = { value: number };
 
 export type MeasureKey = keyof Measure;
 
-const getCategories = (
+const getOrders = (
   orders: Order[],
   category: CatKey,
-  yaxis: MeasureKey
+  yaxis: MeasureKey,
+  aggregate: string
 ) => {
   const cat = orders?.map((order) => order[category]);
 
@@ -43,7 +38,14 @@ const getCategories = (
   for (const cat of categories) {
     const filter = orders.filter((order) => order[category] === cat);
 
-    const measure = getMeasure(filter, yaxis);
+    let measure;
+
+    if (aggregate === 'mean') {
+      measure = mean(filter, yaxis);
+    } else {
+      measure = sum(filter, yaxis);
+    }
+
     data.push(measure);
   }
 
@@ -53,12 +55,18 @@ const getCategories = (
   };
 };
 
-const getMeasure = (filter: Order[], yaxis: MeasureKey) => {
-  if (yaxis === 'value') {
-    const totalValue = sum(filter, yaxis);
-    return totalValue;
-  }
+const sum = (array: Order[], yaxis: MeasureKey): number => {
+  const sum = array
+    ?.reduce((partialSum, a) => partialSum + Number(a[yaxis]), 0)
+    .toFixed(2);
 
-  const totalValue = sum(filter, yaxis);
-  return totalValue;
+  return parseInt(sum);
+};
+
+const mean = (array: Order[], yaxis: MeasureKey) => {
+  const s = sum(array, yaxis);
+
+  const avg = s / array.length || 0;
+
+  return Math.round(avg);
 };

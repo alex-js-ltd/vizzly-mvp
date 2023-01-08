@@ -28,7 +28,12 @@ type Order {
 }
 
 type Query {
-  orders(xaxis: String, yaxis: String): OrderResolver
+  orders(
+    xaxis: String
+    yaxis: String
+    aggregate: String!
+    chartType: String
+  ): OrderResolver
 }
 
 type OrderResolver {

@@ -57,6 +57,8 @@ export type Query = {
 
 
 export type QueryOrdersArgs = {
+  aggregate: Scalars['String'];
+  chartType?: InputMaybe<Scalars['String']>;
   xaxis?: InputMaybe<Scalars['String']>;
   yaxis?: InputMaybe<Scalars['String']>;
 };
@@ -64,10 +66,12 @@ export type QueryOrdersArgs = {
 export type OrdersQueryVariables = Exact<{
   xaxis?: InputMaybe<Scalars['String']>;
   yaxis?: InputMaybe<Scalars['String']>;
+  aggregate: Scalars['String'];
+  chartType?: InputMaybe<Scalars['String']>;
 }>;
 
 
 export type OrdersQuery = { __typename?: 'Query', orders?: { __typename?: 'OrderResolver', data?: Array<number | null> | null, categories?: Array<string | null> | null } | null };
 
 
-export const OrdersDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"orders"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"xaxis"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"yaxis"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"orders"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"xaxis"},"value":{"kind":"Variable","name":{"kind":"Name","value":"xaxis"}}},{"kind":"Argument","name":{"kind":"Name","value":"yaxis"},"value":{"kind":"Variable","name":{"kind":"Name","value":"yaxis"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"}},{"kind":"Field","name":{"kind":"Name","value":"categories"}}]}}]}}]} as unknown as DocumentNode<OrdersQuery, OrdersQueryVariables>;
+export const OrdersDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"orders"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"xaxis"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"yaxis"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"aggregate"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"chartType"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"orders"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"xaxis"},"value":{"kind":"Variable","name":{"kind":"Name","value":"xaxis"}}},{"kind":"Argument","name":{"kind":"Name","value":"yaxis"},"value":{"kind":"Variable","name":{"kind":"Name","value":"yaxis"}}},{"kind":"Argument","name":{"kind":"Name","value":"aggregate"},"value":{"kind":"Variable","name":{"kind":"Name","value":"aggregate"}}},{"kind":"Argument","name":{"kind":"Name","value":"chartType"},"value":{"kind":"Variable","name":{"kind":"Name","value":"chartType"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"}},{"kind":"Field","name":{"kind":"Name","value":"categories"}}]}}]}}]} as unknown as DocumentNode<OrdersQuery, OrdersQueryVariables>;

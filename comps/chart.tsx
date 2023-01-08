@@ -22,7 +22,13 @@ const BarChart = ({ data, categories, chartType }: Props) => {
   ];
 
   return (
-    <Chart options={options} series={series} type={chartType} width='100%' />
+    <Chart
+      options={options}
+      series={series}
+      type={chartType}
+      width='100%'
+      height='100%'
+    />
   );
 };
 

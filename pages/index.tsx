@@ -2,7 +2,7 @@ import dynamic from 'next/dynamic';
 import { useOrders } from 'utils/hooks.client';
 import type { ReactElement } from 'react';
 import Layout from 'comps/layout';
-import { useCategory } from 'comps/layout';
+import { useInput } from 'comps/layout';
 import { Spinner } from 'comps/lib';
 import * as colors from 'styles/colors';
 const BarChart = dynamic(() => import('../comps/chart'), {
@@ -10,10 +10,10 @@ const BarChart = dynamic(() => import('../comps/chart'), {
 });
 
 export default function Home() {
-  const { category } = useCategory();
+  const { category, yaxis } = useInput();
   const { data, categories, isError, error, isLoading } = useOrders(
     category,
-    'value'
+    yaxis
   );
   return (
     <>

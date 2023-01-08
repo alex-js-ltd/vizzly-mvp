@@ -11,7 +11,7 @@ import * as colors from 'styles/colors';
 
 const Layout = ({ children }: { children: ReactElement }) => {
   return (
-    <Category>
+    <Input>
       <div
         css={{
           display: 'flex',
@@ -42,14 +42,14 @@ const Layout = ({ children }: { children: ReactElement }) => {
         </div>
         <main css={{ width: '100%' }}>{children}</main>
       </div>
-    </Category>
+    </Input>
   );
 };
 
 export default Layout;
 
 const Nav = () => {
-  const { setCategory } = useCategory();
+  const { setInput, category, yaxis } = useInput();
   return (
     <nav
       css={{
@@ -71,43 +71,50 @@ const Nav = () => {
         }}
       >
         <li>
-          <Button onClick={() => setCategory('category')}>Category</Button>
+          <Button onClick={() => setInput({ category: 'category', yaxis })}>
+            Category
+          </Button>
         </li>
         <li>
-          <Button onClick={() => setCategory('payment_method')}>
+          <Button
+            onClick={() => setInput({ category: 'payment_method', yaxis })}
+          >
             Payment Method
           </Button>
         </li>
         <li>
-          <Button onClick={() => setCategory('month')}>Month</Button>
+          <Button onClick={() => setInput({ category: 'month', yaxis })}>
+            Month
+          </Button>
         </li>
       </ul>
     </nav>
   );
 };
 
-const CategoryContext = createContext<
-  { category: string; setCategory: Function } | undefined
+const InputContext = createContext<
+  { category: string; yaxis: string; setInput: Function } | undefined
 >(undefined);
 
-const Category = ({ children }: { children: ReactNode }) => {
-  const [category, setCategory] = useState('category');
+const Input = ({ children }: { children: ReactNode }) => {
+  const [state, setInput] = useState({
+    category: 'category',
+    yaxis: 'value',
+  });
 
-  const value = { category, setCategory };
+  const { category, yaxis } = state;
+
+  const value = { category, yaxis, setInput };
 
   return (
-    <CategoryContext.Provider value={value}>
-      {children}
-    </CategoryContext.Provider>
+    <InputContext.Provider value={value}>{children}</InputContext.Provider>
   );
 };
 
-export const useCategory = () => {
-  const context = useContext(CategoryContext);
+export const useInput = () => {
+  const context = useContext(InputContext);
   if (context === undefined) {
-    throw new Error(
-      `useCategory must be used within a CategoryContext provider`
-    );
+    throw new Error(`useInput must be used within a InputContext provider`);
   }
   return context;
 };

@@ -51,7 +51,9 @@ const Layout = ({ children }: { children: ReactElement }) => {
 export default Layout;
 
 const Nav = () => {
-  const { setInput, category, yaxis, chartType } = useInput();
+  const input = useInput();
+
+  const { setInput, ...rest } = input;
 
   return (
     <nav
@@ -74,25 +76,19 @@ const Nav = () => {
         }}
       >
         <li>
-          <Button
-            onClick={() => setInput({ category: 'category', yaxis, chartType })}
-          >
+          <Button onClick={() => setInput({ ...rest, category: 'category' })}>
             Category
           </Button>
         </li>
         <li>
           <Button
-            onClick={() =>
-              setInput({ category: 'payment_method', yaxis, chartType })
-            }
+            onClick={() => setInput({ ...rest, category: 'payment_method' })}
           >
             Payment Method
           </Button>
         </li>
         <li>
-          <Button
-            onClick={() => setInput({ category: 'month', yaxis, chartType })}
-          >
+          <Button onClick={() => setInput({ ...rest, category: 'month' })}>
             Month
           </Button>
         </li>
@@ -105,9 +101,8 @@ const Nav = () => {
                 name='yaxis'
                 onChange={(e) =>
                   setInput({
-                    category,
+                    ...rest,
                     yaxis: e.currentTarget.value,
-                    chartType,
                   })
                 }
               >
@@ -126,8 +121,7 @@ const Nav = () => {
                 name='chartType'
                 onChange={(e) =>
                   setInput({
-                    category,
-                    yaxis,
+                    ...rest,
                     chartType: e.currentTarget.value,
                   })
                 }

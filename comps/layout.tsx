@@ -102,6 +102,9 @@ const Nav = () => {
                   setInput({ category, yaxis: e.currentTarget.value })
                 }
               >
+                <option value='' selected disabled hidden>
+                  Change Yaxis
+                </option>
                 <option value='value'>value</option>
                 <option value='total'>total</option>
                 <option value='qty_ordered'>qty_ordered</option>

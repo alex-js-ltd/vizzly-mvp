@@ -89,6 +89,7 @@ const inputStyles = {
 const FormGroup = styled.div({
   marginTop: 20,
   display: 'flex',
+  flexDirection: 'column',
   justifyContent: 'space-between',
   width: '100%',
 });

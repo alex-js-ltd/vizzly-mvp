@@ -148,7 +148,11 @@ const Nav = () => {
 
 export type ChartType = 'bar' | 'line';
 
-type State = { category: string; yaxis: string; chartType: ChartType };
+export type Category = 'category' | 'payment_method' | 'month';
+
+export type Yaxis = 'value' | 'total' | 'qty_ordered';
+
+type State = { category: Category; yaxis: Yaxis; chartType: ChartType };
 
 type Context = State & {
   setInput: Function;

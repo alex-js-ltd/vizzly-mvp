@@ -1,11 +1,11 @@
 import { req } from './request.client';
-import { useQuery, useQueryClient } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 import { graphql } from 'generated/gql';
-import { ChartType } from 'comps/layout';
+import { ChartType, Category, Yaxis } from 'comps/layout';
 
 export { useOrders };
 
-const useOrders = (xaxis: string, yaxis: string, chartType: ChartType) => {
+const useOrders = (xaxis: Category, yaxis: Yaxis, chartType: ChartType) => {
   const result = useQuery<
     { orders: { data: number[]; categories: string[] } },
     Error

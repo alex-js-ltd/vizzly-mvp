@@ -1,8 +1,9 @@
 import Chart from 'react-apexcharts';
+import type { ChartType } from './layout';
 
-type Props = { data?: number[]; categories?: string[] };
+type Props = { data?: number[]; categories?: string[]; chartType: ChartType };
 
-const BarChart = ({ data, categories }: Props) => {
+const BarChart = ({ data, categories, chartType }: Props) => {
   if (!data || !categories) return null;
   const options = {
     chart: {
@@ -20,7 +21,9 @@ const BarChart = ({ data, categories }: Props) => {
     },
   ];
 
-  return <Chart options={options} series={series} type='bar' width='100%' />;
+  return (
+    <Chart options={options} series={series} type={chartType} width='100%' />
+  );
 };
 
 export default BarChart;

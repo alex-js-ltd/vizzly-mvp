@@ -4,7 +4,6 @@ import {
   useState,
   ReactNode,
   useContext,
-  FormEvent,
 } from 'react';
 import { Button } from 'comps/lib';
 import * as mq from 'styles/media-queries';
@@ -52,7 +51,7 @@ const Layout = ({ children }: { children: ReactElement }) => {
 export default Layout;
 
 const Nav = () => {
-  const { setInput, category, yaxis } = useInput();
+  const { setInput, category, yaxis, chartType } = useInput();
 
   return (
     <nav
@@ -75,19 +74,25 @@ const Nav = () => {
         }}
       >
         <li>
-          <Button onClick={() => setInput({ category: 'category', yaxis })}>
+          <Button
+            onClick={() => setInput({ category: 'category', yaxis, chartType })}
+          >
             Category
           </Button>
         </li>
         <li>
           <Button
-            onClick={() => setInput({ category: 'payment_method', yaxis })}
+            onClick={() =>
+              setInput({ category: 'payment_method', yaxis, chartType })
+            }
           >
             Payment Method
           </Button>
         </li>
         <li>
-          <Button onClick={() => setInput({ category: 'month', yaxis })}>
+          <Button
+            onClick={() => setInput({ category: 'month', yaxis, chartType })}
+          >
             Month
           </Button>
         </li>
@@ -99,7 +104,11 @@ const Nav = () => {
                 id='yaxis'
                 name='yaxis'
                 onChange={(e) =>
-                  setInput({ category, yaxis: e.currentTarget.value })
+                  setInput({
+                    category,
+                    yaxis: e.currentTarget.value,
+                    chartType,
+                  })
                 }
               >
                 <option value='' selected disabled hidden>
@@ -110,6 +119,26 @@ const Nav = () => {
                 <option value='qty_ordered'>qty_ordered</option>
               </Select>
             </FormGroup>
+
+            <FormGroup>
+              <Select
+                id='chartType'
+                name='chartType'
+                onChange={(e) =>
+                  setInput({
+                    category,
+                    yaxis,
+                    chartType: e.currentTarget.value,
+                  })
+                }
+              >
+                <option value='' selected disabled hidden>
+                  Change Chart
+                </option>
+                <option value='bar'>bar</option>
+                <option value='line'>line</option>
+              </Select>
+            </FormGroup>
           </form>
         </li>
       </ul>
@@ -117,19 +146,25 @@ const Nav = () => {
   );
 };
 
-const InputContext = createContext<
-  { category: string; yaxis: string; setInput: Function } | undefined
->(undefined);
+export type ChartType = 'bar' | 'line';
+
+type State = { category: string; yaxis: string; chartType: ChartType };
+
+type Context = State & {
+  setInput: Function;
+};
+const InputContext = createContext<Context | undefined>(undefined);
 
 const Input = ({ children }: { children: ReactNode }) => {
-  const [state, setInput] = useState({
+  const [state, setInput] = useState<State>({
     category: 'category',
     yaxis: 'value',
+    chartType: 'bar',
   });
 
-  const { category, yaxis } = state;
+  const { category, yaxis, chartType } = state;
 
-  const value = { category, yaxis, setInput };
+  const value = { category, yaxis, chartType, setInput };
 
   return (
     <InputContext.Provider value={value}>{children}</InputContext.Provider>

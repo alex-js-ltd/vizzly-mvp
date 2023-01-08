@@ -23,7 +23,7 @@ const sum = (array: Order[]) => {
 
 type Categories = { category: string; payment_method: string; month: string };
 
-type Key = keyof Categories;
+export type Key = keyof Categories;
 
 const getCategories = (orders: Order[], category: Key) => {
   const cat = orders?.map((order) => order[category]);

@@ -8,3 +8,4 @@ generates:
       contextType: pages/api/graphql#Context
       mappers:
         Order: pages/api/graphql#PrismaOrder
+      inputMaybeValue: utils/query.server#Key | T

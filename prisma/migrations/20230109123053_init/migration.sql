@@ -1,15 +1,16 @@
 -- CreateTable
 CREATE TABLE "Order" (
+    "id" SERIAL NOT NULL,
     "order_id" INTEGER NOT NULL,
-    "order_date" TIMESTAMP(3) NOT NULL,
+    "order_date" TEXT NOT NULL,
     "status" TEXT NOT NULL,
     "item_id" INTEGER NOT NULL,
     "sku" TEXT NOT NULL,
     "qty_ordered" INTEGER NOT NULL,
     "price" DECIMAL(65,30) NOT NULL,
-    "value" INTEGER NOT NULL,
-    "discount_amount" INTEGER NOT NULL,
-    "total" INTEGER NOT NULL,
+    "value" DECIMAL(65,30) NOT NULL,
+    "discount_amount" DOUBLE PRECISION NOT NULL,
+    "total" DECIMAL(65,30) NOT NULL,
     "category" TEXT NOT NULL,
     "payment_method" TEXT NOT NULL,
     "bi_st" TEXT NOT NULL,
@@ -17,15 +18,14 @@ CREATE TABLE "Order" (
     "year" INTEGER NOT NULL,
     "month" TEXT NOT NULL,
     "ref_num" INTEGER NOT NULL,
-    "customer_since" TIMESTAMP(3) NOT NULL,
+    "customer_since" TEXT NOT NULL,
     "place_name" TEXT NOT NULL,
     "county" TEXT NOT NULL,
     "city" TEXT NOT NULL,
     "state" TEXT NOT NULL,
     "zip" INTEGER NOT NULL,
     "region" TEXT NOT NULL,
-    "discount_percent" INTEGER NOT NULL
-);
+    "discount_percent" DOUBLE PRECISION NOT NULL,
 
--- CreateIndex
-CREATE UNIQUE INDEX "Order_order_id_key" ON "Order"("order_id");
+    CONSTRAINT "Order_pkey" PRIMARY KEY ("id")
+);

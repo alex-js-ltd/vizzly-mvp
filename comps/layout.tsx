@@ -154,6 +154,7 @@ const Nav = () => {
               >
                 <option value='bar'>bar</option>
                 <option value='line'>line</option>
+                <option value='donut'>donut</option>
               </Select>
             </FormGroup>
           </form>
@@ -169,7 +170,7 @@ export type Measure = 'value' | 'total' | 'qty_ordered';
 
 export type Aggregate = 'sum' | 'mean';
 
-export type ChartType = 'bar' | 'line';
+export type ChartType = 'bar' | 'line' | 'donut';
 
 type State = {
   dimension: Dimension;

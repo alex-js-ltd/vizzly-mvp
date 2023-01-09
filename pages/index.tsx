@@ -13,6 +13,10 @@ const LineChart = dynamic(() => import('../comps/line-chart'), {
   ssr: false,
 });
 
+const DonutChart = dynamic(() => import('../comps/donut-chart'), {
+  ssr: false,
+});
+
 export default function Home() {
   const { dimension, measure, aggregate, chartType } = useInput();
   const { data, dimensions, isError, error, isLoading } = useOrders(
@@ -30,6 +34,10 @@ export default function Home() {
 
       {chartType === 'line' ? (
         <LineChart data={data} dimensions={dimensions} measure={measure} />
+      ) : null}
+
+      {chartType === 'donut' ? (
+        <DonutChart data={data} dimensions={dimensions} measure={measure} />
       ) : null}
 
       {isError ? (

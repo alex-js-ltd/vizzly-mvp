@@ -5,7 +5,13 @@ const Query: QueryResolvers = {
   orders: async (_parent, args, ctx) => {
     const { dimension, measure, aggregate } = args;
 
-    const orders = await ctx.prisma.order.findMany();
+    let orders;
+
+    try {
+      orders = await ctx.prisma.order.findMany();
+    } catch (error) {
+      return null;
+    }
 
     return getOrders(orders, dimension, measure, aggregate);
   },
@@ -17,7 +23,7 @@ type Dimensions = { category: string; payment_method: string; month: string };
 
 export type DimensionKey = keyof Dimensions;
 
-type Measure = { value: number };
+type Measure = { value: number; total: string; qty_ordered: string };
 
 export type MeasureKey = keyof Measure;
 
@@ -43,16 +49,16 @@ const getOrders = (
   };
 };
 
-const sum = (array: Order[], yaxis: MeasureKey): number => {
+const sum = (array: Order[], measure: MeasureKey): number => {
   const sum = array
-    ?.reduce((partialSum, a) => partialSum + Number(a[yaxis]), 0)
+    ?.reduce((partialSum, a) => partialSum + Number(a[measure]), 0)
     .toFixed(2);
 
   return parseInt(sum);
 };
 
-const mean = (array: Order[], yaxis: MeasureKey) => {
-  const s = sum(array, yaxis);
+const mean = (array: Order[], measure: MeasureKey) => {
+  const s = sum(array, measure);
 
   const avg = s / array.length || 0;
 

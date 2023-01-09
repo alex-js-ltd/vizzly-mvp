@@ -1,14 +1,14 @@
 import { req } from './request.client';
 import { useQuery } from '@tanstack/react-query';
 import { graphql } from 'generated/gql';
-import { ChartType, Dimension, Measure } from 'comps/layout';
+import { ChartType, Dimension, Measure, Aggregate } from 'comps/layout';
 
 export { useOrders };
 
 const useOrders = (
   dimension: Dimension,
   measure: Measure,
-  aggregate: string,
+  aggregate: Aggregate,
   chartType: ChartType
 ) => {
   const result = useQuery<

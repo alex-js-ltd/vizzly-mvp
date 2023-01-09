@@ -96,23 +96,6 @@ const Nav = () => {
             </FormGroup>
 
             <FormGroup>
-              <Label>Aggregate:</Label>
-              <Select
-                id='aggregate'
-                name='aggregate'
-                defaultValue={rest.aggregate}
-                onChange={(e) =>
-                  setInput({
-                    ...rest,
-                    aggregate: e.currentTarget.value,
-                  })
-                }
-              >
-                <option value='sum'>sum</option>
-                <option value='mean'>mean</option>
-              </Select>
-            </FormGroup>
-            <FormGroup>
               <Label>Measure:</Label>
               <Select
                 id='measure'
@@ -128,6 +111,24 @@ const Nav = () => {
                 <option value='value'>value</option>
                 <option value='total'>total</option>
                 <option value='qty_ordered'>qty_ordered</option>
+              </Select>
+            </FormGroup>
+
+            <FormGroup>
+              <Label>Aggregate:</Label>
+              <Select
+                id='aggregate'
+                name='aggregate'
+                defaultValue={rest.aggregate}
+                onChange={(e) =>
+                  setInput({
+                    ...rest,
+                    aggregate: e.currentTarget.value,
+                  })
+                }
+              >
+                <option value='sum'>sum</option>
+                <option value='mean'>mean</option>
               </Select>
             </FormGroup>
 
@@ -155,16 +156,18 @@ const Nav = () => {
   );
 };
 
-export type ChartType = 'bar' | 'line';
-
 export type Dimension = 'category' | 'payment_method' | 'month';
 
 export type Measure = 'value' | 'total' | 'qty_ordered';
 
+export type Aggregate = 'sum' | 'mean';
+
+export type ChartType = 'bar' | 'line';
+
 type State = {
   dimension: Dimension;
   measure: Measure;
-  aggregate: string;
+  aggregate: Aggregate;
   chartType: ChartType;
 };
 

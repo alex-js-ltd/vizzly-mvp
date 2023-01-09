@@ -5,7 +5,11 @@ import Layout from 'comps/layout';
 import { useInput } from 'comps/layout';
 import { Spinner } from 'comps/lib';
 import * as colors from 'styles/colors';
-const BarChart = dynamic(() => import('../comps/chart'), {
+const BarChart = dynamic(() => import('../comps/bar-chart'), {
+  ssr: false,
+});
+
+const LineChart = dynamic(() => import('../comps/line-chart'), {
   ssr: false,
 });
 
@@ -20,7 +24,13 @@ export default function Home() {
 
   return (
     <>
-      <BarChart data={data} dimensions={dimensions} chartType={chartType} />
+      {chartType === 'bar' ? (
+        <BarChart data={data} dimensions={dimensions} />
+      ) : null}
+
+      {chartType === 'line' ? (
+        <LineChart data={data} dimensions={dimensions} measure={measure} />
+      ) : null}
 
       {isError ? (
         <div css={{ color: colors.danger }}>

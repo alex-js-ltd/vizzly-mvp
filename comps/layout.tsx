@@ -41,7 +41,14 @@ const Layout = ({ children }: { children: ReactElement }) => {
         <div css={{ position: 'relative' }}>
           <Nav />
         </div>
-        <main css={{ width: '100%', minHeight: '400px' }}>{children}</main>
+        <main
+          css={{
+            width: '100%',
+            minHeight: '400px',
+          }}
+        >
+          {children}
+        </main>
       </div>
     </Input>
   );

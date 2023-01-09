@@ -41,6 +41,25 @@ const LineChart = ({ data, dimensions, measure }: Props) => {
     },
     xaxis: {
       categories: dimensions,
+      labels: {
+        rotateAlways: true,
+        style: {
+          fontSize: '6px',
+        },
+      },
+    },
+
+    fill: {
+      type: 'gradient',
+      gradient: {
+        shade: 'dark',
+        gradientToColors: ['#FDD835'],
+        shadeIntensity: 1,
+        type: 'horizontal',
+        opacityFrom: 1,
+        opacityTo: 1,
+        stops: [0, 100, 100, 100],
+      },
     },
   };
   return (

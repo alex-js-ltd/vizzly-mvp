@@ -44,7 +44,7 @@ const LineChart = ({ data, dimensions, measure }: Props) => {
       labels: {
         rotateAlways: true,
         style: {
-          fontSize: '6px',
+          fontSize: '8px',
         },
       },
     },
@@ -62,15 +62,7 @@ const LineChart = ({ data, dimensions, measure }: Props) => {
       },
     },
   };
-  return (
-    <Chart
-      options={options}
-      series={series}
-      type='line'
-      width='100%'
-      height='100%'
-    />
-  );
+  return <Chart options={options} series={series} type='line' width='100%' />;
 };
 
 export default LineChart;

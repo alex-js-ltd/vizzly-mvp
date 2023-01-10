@@ -75,72 +75,63 @@ const Nav = () => {
         },
       }}
     >
-      <ul
-        css={{
-          listStyle: 'none',
-          padding: '0',
-        }}
-      >
-        <li>
-          <form>
-            <FormGroup>
-              <Label>Dimension:</Label>
-              <Select
-                id='dimension'
-                name='dimension'
-                defaultValue={rest.dimension}
-                onChange={(e) =>
-                  setInput({
-                    ...rest,
-                    dimension: e.currentTarget.value,
-                  })
-                }
-              >
-                <option value='category'>category</option>
-                <option value='payment_method'>payment</option>
-                <option value='month'>month</option>
-              </Select>
-            </FormGroup>
+      <form>
+        <FormGroup>
+          <Label>Dimension:</Label>
+          <Select
+            id='dimension'
+            name='dimension'
+            defaultValue={rest.dimension}
+            onChange={(e) =>
+              setInput({
+                ...rest,
+                dimension: e.currentTarget.value,
+              })
+            }
+          >
+            <option value='category'>category</option>
+            <option value='payment_method'>payment</option>
+            <option value='month'>month</option>
+          </Select>
+        </FormGroup>
 
-            <FormGroup>
-              <Label>Measure:</Label>
-              <Select
-                id='measure'
-                name='measure'
-                defaultValue={rest.measure}
-                onChange={(e) =>
-                  setInput({
-                    ...rest,
-                    measure: e.currentTarget.value,
-                  })
-                }
-              >
-                <option value='value'>value</option>
-                <option value='total'>total</option>
-                <option value='qty_ordered'>qty_ordered</option>
-              </Select>
-            </FormGroup>
+        <FormGroup>
+          <Label>Measure:</Label>
+          <Select
+            id='measure'
+            name='measure'
+            defaultValue={rest.measure}
+            onChange={(e) =>
+              setInput({
+                ...rest,
+                measure: e.currentTarget.value,
+              })
+            }
+          >
+            <option value='value'>value</option>
+            <option value='total'>total</option>
+            <option value='qty_ordered'>qty_ordered</option>
+          </Select>
+        </FormGroup>
 
-            <FormGroup>
-              <Label>Aggregate:</Label>
-              <Select
-                id='aggregate'
-                name='aggregate'
-                defaultValue={rest.aggregate}
-                onChange={(e) =>
-                  setInput({
-                    ...rest,
-                    aggregate: e.currentTarget.value,
-                  })
-                }
-              >
-                <option value='sum'>sum</option>
-                <option value='mean'>mean</option>
-              </Select>
-            </FormGroup>
-          </form>
-        </li>
-      </ul>
+        <FormGroup>
+          <Label>Aggregate:</Label>
+          <Select
+            id='aggregate'
+            name='aggregate'
+            defaultValue={rest.aggregate}
+            onChange={(e) =>
+              setInput({
+                ...rest,
+                aggregate: e.currentTarget.value,
+              })
+            }
+          >
+            <option value='sum'>sum</option>
+            <option value='mean'>mean</option>
+          </Select>
+        </FormGroup>
+      </form>
     </nav>
   );
 };

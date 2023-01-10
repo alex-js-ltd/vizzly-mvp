@@ -1,6 +1,5 @@
 import Chart from 'react-apexcharts';
 import type { ApexOptions } from 'apexcharts';
-import { ChartWrapper } from './lib';
 
 type Props = { data?: number[]; dimensions?: string[]; measure: string };
 

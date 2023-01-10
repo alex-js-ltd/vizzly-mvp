@@ -138,25 +138,6 @@ const Nav = () => {
                 <option value='mean'>mean</option>
               </Select>
             </FormGroup>
-
-            <FormGroup>
-              <Label>Chart Type:</Label>
-              <Select
-                id='chartType'
-                name='chartType'
-                defaultValue={rest.chartType}
-                onChange={(e) =>
-                  setInput({
-                    ...rest,
-                    chartType: e.currentTarget.value,
-                  })
-                }
-              >
-                <option value='bar'>bar</option>
-                <option value='line'>line</option>
-                <option value='donut'>donut</option>
-              </Select>
-            </FormGroup>
           </form>
         </li>
       </ul>

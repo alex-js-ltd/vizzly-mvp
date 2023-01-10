@@ -58,22 +58,14 @@ const Select = styled.select({
   },
 });
 
-// const Grid = styled.div({
-//   display: 'grid',
-//   gridTemplateColumns: '1fr 1fr',
-//   gridTemplateRows: '1fr 1fr',
-//   gridTemplateAreas: `'bar .'
-//     'donut .'
-//     'line .'`,
-// });
-
 const Grid = styled.div({
   display: 'flex',
   flexDirection: 'column',
+
+  [mq.small]: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+  },
 });
 
-const ChartWrapper = styled.div({
-  width: '50%',
-});
-
-export { Spinner, FormGroup, Select, Label, Grid, ChartWrapper };
+export { Spinner, FormGroup, Select, Label, Grid };

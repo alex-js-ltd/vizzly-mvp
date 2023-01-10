@@ -1,6 +1,6 @@
 import Chart from 'react-apexcharts';
 import type { ApexOptions } from 'apexcharts';
-import { ChartWrapper } from './lib';
+import * as colors from 'styles/colors';
 
 type Props = { data?: number[]; dimensions?: string[] };
 
@@ -35,13 +35,32 @@ const BarChart = ({ data, dimensions }: Props) => {
 
     yaxis: {
       labels: {
-        show: true,
+        show: false,
+        style: {
+          colors: [colors.text],
+        },
       },
     },
 
     legend: {
       show: false,
     },
+
+    responsive: [
+      {
+        breakpoint: 991,
+        options: {
+          yaxis: {
+            labels: {
+              show: true,
+              style: {
+                colors: [colors.text],
+              },
+            },
+          },
+        },
+      },
+    ],
   };
 
   let series = [

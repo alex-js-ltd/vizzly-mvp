@@ -15,15 +15,6 @@ const Layout = ({ children }: { children: ReactElement }) => {
     <Input>
       <div
         css={{
-          display: 'flex',
-          alignItems: 'center',
-          position: 'absolute',
-          top: '10px',
-          right: '10px',
-        }}
-      ></div>
-      <div
-        css={{
           margin: '0 auto',
           padding: '4em 2em',
           maxWidth: '840px',

@@ -19,6 +19,8 @@ const BarChart = ({ data, dimensions }: Props) => {
       bar: {
         borderRadius: 4,
         horizontal: true,
+
+        distributed: true,
       },
     },
     dataLabels: {
@@ -26,12 +28,19 @@ const BarChart = ({ data, dimensions }: Props) => {
     },
     xaxis: {
       categories: dimensions,
+      labels: {
+        show: false,
+      },
     },
 
     yaxis: {
       labels: {
-        show: false,
+        show: true,
       },
+    },
+
+    legend: {
+      show: false,
     },
   };
 

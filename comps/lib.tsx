@@ -58,4 +58,18 @@ const Select = styled.select({
   },
 });
 
-export { Spinner, FormGroup, Select, Label };
+const Grid = styled.div`
+  display: grid;
+  grid-gap: 14px;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  grid-template-areas:
+    'bar line'
+    'donut .';
+`;
+
+const ChartWrapper = styled.div({
+  width: '50%',
+});
+
+export { Spinner, FormGroup, Select, Label, Grid, ChartWrapper };

@@ -1,5 +1,6 @@
 import Chart from 'react-apexcharts';
 import type { ApexOptions } from 'apexcharts';
+import { ChartWrapper } from './lib';
 
 type Props = { data?: number[]; dimensions?: string[]; measure: string };
 
@@ -14,7 +15,6 @@ const LineChart = ({ data, dimensions, measure }: Props) => {
 
   const options: ApexOptions = {
     chart: {
-      height: 350,
       type: 'line',
       zoom: {
         enabled: false,
@@ -29,10 +29,7 @@ const LineChart = ({ data, dimensions, measure }: Props) => {
     stroke: {
       curve: 'straight',
     },
-    title: {
-      text: measure,
-      align: 'left',
-    },
+
     grid: {
       row: {
         colors: ['#f3f3f3', 'transparent'], // takes an array which will be repeated on columns
@@ -42,10 +39,7 @@ const LineChart = ({ data, dimensions, measure }: Props) => {
     xaxis: {
       categories: dimensions,
       labels: {
-        rotateAlways: true,
-        style: {
-          fontSize: '8px',
-        },
+        show: false,
       },
     },
 
@@ -62,7 +56,11 @@ const LineChart = ({ data, dimensions, measure }: Props) => {
       },
     },
   };
-  return <Chart options={options} series={series} type='line' width='100%' />;
+  return (
+    <div css={{ gridArea: 'line' }}>
+      <Chart options={options} series={series} type='line' width='100%' />
+    </div>
+  );
 };
 
 export default LineChart;

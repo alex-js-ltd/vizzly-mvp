@@ -1,5 +1,6 @@
 import Chart from 'react-apexcharts';
 import type { ApexOptions } from 'apexcharts';
+import { ChartWrapper } from './lib';
 
 type Props = { data?: number[]; dimensions?: string[] };
 
@@ -9,7 +10,7 @@ const BarChart = ({ data, dimensions }: Props) => {
   let options: ApexOptions = {
     chart: {
       type: 'bar',
-      height: 350,
+
       toolbar: {
         show: false,
       },
@@ -26,6 +27,12 @@ const BarChart = ({ data, dimensions }: Props) => {
     xaxis: {
       categories: dimensions,
     },
+
+    yaxis: {
+      labels: {
+        show: false,
+      },
+    },
   };
 
   let series = [
@@ -34,7 +41,11 @@ const BarChart = ({ data, dimensions }: Props) => {
     },
   ];
 
-  return <Chart options={options} series={series} type='bar' width='100%' />;
+  return (
+    <div css={{ gridArea: 'bar' }}>
+      <Chart options={options} series={series} type='bar' width='100%' />
+    </div>
+  );
 };
 
 export default BarChart;

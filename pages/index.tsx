@@ -3,8 +3,9 @@ import { useOrders } from 'utils/hooks.client';
 import type { ReactElement } from 'react';
 import Layout from 'comps/layout';
 import { useInput } from 'comps/layout';
-import { Spinner } from 'comps/lib';
+import { Spinner, Grid } from 'comps/lib';
 import * as colors from 'styles/colors';
+
 const BarChart = dynamic(() => import('../comps/bar-chart'), {
   ssr: false,
 });
@@ -27,28 +28,11 @@ export default function Home() {
   );
 
   return (
-    <>
-      {chartType === 'bar' ? (
-        <BarChart data={data} dimensions={dimensions} />
-      ) : null}
-
-      {chartType === 'line' ? (
-        <LineChart data={data} dimensions={dimensions} measure={measure} />
-      ) : null}
-
-      {chartType === 'donut' ? (
-        <DonutChart data={data} dimensions={dimensions} measure={measure} />
-      ) : null}
-
-      {isError ? (
-        <div css={{ color: colors.danger }}>
-          <p>There was an error:</p>
-          <pre>{error.message}</pre>
-        </div>
-      ) : null}
-
-      {isLoading ? <Spinner /> : null}
-    </>
+    <Grid>
+      <BarChart data={data} dimensions={dimensions} />
+      <LineChart data={data} dimensions={dimensions} measure={measure} />
+      <DonutChart data={data} dimensions={dimensions} measure={measure} />
+    </Grid>
   );
 }
 

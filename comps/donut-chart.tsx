@@ -1,5 +1,6 @@
 import Chart from 'react-apexcharts';
 import type { ApexOptions } from 'apexcharts';
+import { ChartWrapper } from './lib';
 
 type Props = { data?: number[]; dimensions?: string[]; measure: string };
 
@@ -24,36 +25,14 @@ const DonutChart = ({ data, dimensions, measure }: Props) => {
       type: 'gradient',
     },
     legend: {
-      formatter: function (val, opts) {
-        return val + ' - ' + opts.w.globals.series[opts.seriesIndex];
-      },
+      show: false,
     },
-    title: {
-      text: measure,
-    },
-    responsive: [
-      {
-        breakpoint: 480,
-        options: {
-          chart: {
-            width: 200,
-          },
-          legend: {
-            position: 'bottom',
-          },
-        },
-      },
-    ],
   };
 
   return (
-    <Chart
-      options={options}
-      series={data}
-      type='donut'
-      width='100%'
-      height='100%'
-    />
+    <div css={{ gridArea: 'donut' }}>
+      <Chart options={options} series={data} type='donut' width='100%' />
+    </div>
   );
 };
 

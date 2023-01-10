@@ -26,7 +26,7 @@ const Layout = ({ children }: { children: ReactElement }) => {
         css={{
           margin: '0 auto',
           padding: '4em 2em',
-
+          maxWidth: '1200px',
           width: '100%',
           display: 'grid',
           gridGap: '1em',

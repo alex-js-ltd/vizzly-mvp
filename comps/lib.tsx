@@ -60,12 +60,8 @@ const Select = styled.select({
 
 const Grid = styled.div({
   display: 'flex',
-  flexDirection: 'column',
-
-  [mq.small]: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-  },
+  flexDirection: 'row',
+  flexWrap: 'wrap',
 });
 
 export { Spinner, FormGroup, Select, Label, Grid };

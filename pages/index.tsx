@@ -30,8 +30,10 @@ export default function Home() {
   return (
     <Grid>
       <BarChart data={data} dimensions={dimensions} />
-      <LineChart data={data} dimensions={dimensions} measure={measure} />
+
       <DonutChart data={data} dimensions={dimensions} measure={measure} />
+
+      <LineChart data={data} dimensions={dimensions} measure={measure} />
     </Grid>
   );
 }

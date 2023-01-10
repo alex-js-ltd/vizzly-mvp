@@ -43,6 +43,12 @@ const LineChart = ({ data, dimensions, measure }: Props) => {
       },
     },
 
+    yaxis: {
+      labels: {
+        show: false,
+      },
+    },
+
     fill: {
       type: 'gradient',
       gradient: {
@@ -57,7 +63,7 @@ const LineChart = ({ data, dimensions, measure }: Props) => {
     },
   };
   return (
-    <div css={{ gridArea: 'line' }}>
+    <div css={{ gridArea: 'line', width: '50%' }}>
       <Chart options={options} series={series} type='line' width='100%' />
     </div>
   );

@@ -2,7 +2,7 @@ import React from 'react';
 import styled from '@emotion/styled';
 import { keyframes } from '@emotion/react';
 import * as colors from 'styles/colors';
-
+import * as mq from 'styles/media-queries';
 import { FaSpinner } from 'react-icons/fa';
 
 const spin = keyframes({
@@ -58,15 +58,19 @@ const Select = styled.select({
   },
 });
 
-const Grid = styled.div`
-  display: grid;
-  grid-gap: 14px;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 1fr;
-  grid-template-areas:
-    'bar line'
-    'donut .';
-`;
+// const Grid = styled.div({
+//   display: 'grid',
+//   gridTemplateColumns: '1fr 1fr',
+//   gridTemplateRows: '1fr 1fr',
+//   gridTemplateAreas: `'bar .'
+//     'donut .'
+//     'line .'`,
+// });
+
+const Grid = styled.div({
+  display: 'flex',
+  flexDirection: 'column',
+});
 
 const ChartWrapper = styled.div({
   width: '50%',

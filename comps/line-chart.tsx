@@ -84,11 +84,7 @@ const LineChart = ({ data, dimensions, measure }: Props) => {
       },
     ],
   };
-  return (
-    <div css={{ width: '50%' }}>
-      <Chart options={options} series={series} type='line' width='100%' />
-    </div>
-  );
+  return <Chart options={options} series={series} type='line' width='100%' />;
 };
 
 export default LineChart;

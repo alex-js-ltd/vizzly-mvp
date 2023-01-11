@@ -4,7 +4,8 @@ import { useOrders } from 'utils/hooks.client';
 import type { ReactElement } from 'react';
 import Layout from 'comps/layout';
 import { useInput } from 'comps/layout';
-import { Spinner, Grid } from 'comps/lib';
+import { Spinner, ChartListUL } from 'comps/lib';
+import { ChartRow } from 'comps/chart-row';
 import * as colors from 'styles/colors';
 
 const BarChart = dynamic(() => import('../comps/bar-chart'), {
@@ -28,14 +29,26 @@ export default function Home() {
   );
 
   return (
-    <Fragment>
-      <Grid>
-        <BarChart data={data} dimensions={dimensions} />
+    <div>
+      <ChartListUL>
+        <li>
+          <ChartRow>
+            <BarChart data={data} dimensions={dimensions} />
+          </ChartRow>
+        </li>
 
-        <LineChart data={data} dimensions={dimensions} measure={measure} />
+        <li>
+          <ChartRow>
+            <LineChart data={data} dimensions={dimensions} measure={measure} />
+          </ChartRow>
+        </li>
 
-        <DonutChart data={data} dimensions={dimensions} measure={measure} />
-      </Grid>
+        <li>
+          <ChartRow>
+            <DonutChart data={data} dimensions={dimensions} measure={measure} />
+          </ChartRow>
+        </li>
+      </ChartListUL>
 
       {isError ? (
         <div css={{ color: colors.danger }}>
@@ -45,7 +58,7 @@ export default function Home() {
       ) : null}
 
       {isLoading ? <Spinner /> : null}
-    </Fragment>
+    </div>
   );
 }
 

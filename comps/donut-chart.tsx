@@ -28,11 +28,7 @@ const DonutChart = ({ data, dimensions, measure }: Props) => {
     },
   };
 
-  return (
-    <div css={{ width: '40%' }}>
-      <Chart options={options} series={data} type='donut' width='100%' />
-    </div>
-  );
+  return <Chart options={options} series={data} type='donut' width='100%' />;
 };
 
 export default DonutChart;

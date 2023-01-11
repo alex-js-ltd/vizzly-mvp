@@ -7,7 +7,7 @@ type Props = { data?: number[]; dimensions?: string[] };
 const BarChart = ({ data, dimensions }: Props) => {
   if (!data || !dimensions) return null;
 
-  let options: ApexOptions = {
+  const options: ApexOptions = {
     chart: {
       type: 'bar',
 
@@ -63,17 +63,13 @@ const BarChart = ({ data, dimensions }: Props) => {
     ],
   };
 
-  let series = [
+  const series = [
     {
       data,
     },
   ];
 
-  return (
-    <div css={{ width: '100%' }}>
-      <Chart options={options} series={series} type='bar' width='100%' />
-    </div>
-  );
+  return <Chart options={options} series={series} type='bar' width='100%' />;
 };
 
 export default BarChart;

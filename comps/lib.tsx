@@ -58,11 +58,12 @@ const Select = styled.select({
   },
 });
 
-const Grid = styled.div({
-  display: 'flex',
-  flexDirection: 'row',
-  flexWrap: 'wrap',
-  justifyContent: 'space-between',
+const ChartListUL = styled.ul({
+  listStyle: 'none',
+  padding: '0',
+  display: 'grid',
+  gridTemplateRows: 'repeat(auto-fill, minmax(100px, 1fr))',
+  gridGap: '1em',
 });
 
-export { Spinner, FormGroup, Select, Label, Grid };
+export { Spinner, FormGroup, Select, Label, ChartListUL };

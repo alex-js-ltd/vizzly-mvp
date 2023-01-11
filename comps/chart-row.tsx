@@ -1,12 +1,11 @@
 import Link from 'next/link';
 import * as mq from 'styles/media-queries';
 import * as colors from 'styles/colors';
-//import { StatusButtons } from './status-buttons';
 import { ReactNode } from 'react';
 
 const ChartRow = ({ children }: { children: ReactNode }) => {
   return (
-    <div
+    <li
       css={{
         display: 'flex',
         alignItems: 'center',
@@ -47,7 +46,7 @@ const ChartRow = ({ children }: { children: ReactNode }) => {
           height: '100%',
         }}
       ></div>
-    </div>
+    </li>
   );
 };
 

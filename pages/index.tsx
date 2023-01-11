@@ -31,23 +31,17 @@ export default function Home() {
   return (
     <div>
       <ChartListUL>
-        <li>
-          <ChartRow>
-            <BarChart data={data} dimensions={dimensions} />
-          </ChartRow>
-        </li>
+        <ChartRow>
+          <BarChart data={data} dimensions={dimensions} />
+        </ChartRow>
 
-        <li>
-          <ChartRow>
-            <LineChart data={data} dimensions={dimensions} measure={measure} />
-          </ChartRow>
-        </li>
+        <ChartRow>
+          <DonutChart data={data} dimensions={dimensions} measure={measure} />
+        </ChartRow>
 
-        <li>
-          <ChartRow>
-            <DonutChart data={data} dimensions={dimensions} measure={measure} />
-          </ChartRow>
-        </li>
+        <ChartRow>
+          <LineChart data={data} dimensions={dimensions} measure={measure} />
+        </ChartRow>
       </ChartListUL>
 
       {isError ? (

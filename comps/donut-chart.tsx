@@ -37,6 +37,8 @@ const DonutChart = ({ data, dimensions, measure }: Props) => {
 
           legend: {
             show: true,
+            position: 'bottom',
+            horizontalAlign: 'center',
           },
         },
       },

@@ -19,7 +19,6 @@ const BarChart = ({ data, dimensions, measure }: Props) => {
       bar: {
         borderRadius: 4,
         horizontal: true,
-
         distributed: true,
       },
     },

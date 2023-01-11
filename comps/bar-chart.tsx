@@ -10,7 +10,6 @@ const BarChart = ({ data, dimensions, measure }: Props) => {
   const options: ApexOptions = {
     chart: {
       type: 'bar',
-
       toolbar: {
         show: false,
       },

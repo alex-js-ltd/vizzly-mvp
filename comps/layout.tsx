@@ -7,8 +7,8 @@ import {
 } from 'react';
 import * as mq from 'styles/media-queries';
 import * as colors from 'styles/colors';
-
-import { FormGroup, Select, Label } from 'comps/lib';
+import { FormGroup, Select as MySelect, Label } from 'comps/lib';
+import { MultiSelect } from './multi-select';
 
 const Layout = ({ children }: { children: ReactElement }) => {
   return (
@@ -69,26 +69,13 @@ const Nav = () => {
       <form>
         <FormGroup>
           <Label>Dimension:</Label>
-          <Select
-            id='dimension'
-            name='dimension'
-            defaultValue={rest.dimension}
-            onChange={(e) =>
-              setInput({
-                ...rest,
-                dimension: e.currentTarget.value,
-              })
-            }
-          >
-            <option value='category'>category</option>
-            <option value='payment_method'>payment</option>
-            <option value='month'>month</option>
-          </Select>
+
+          <MultiSelect />
         </FormGroup>
 
         <FormGroup>
           <Label>Measure:</Label>
-          <Select
+          <MySelect
             id='measure'
             name='measure'
             defaultValue={rest.measure}
@@ -102,12 +89,12 @@ const Nav = () => {
             <option value='value'>value</option>
             <option value='total'>total</option>
             <option value='qty_ordered'>qty_ordered</option>
-          </Select>
+          </MySelect>
         </FormGroup>
 
         <FormGroup>
           <Label>Aggregate:</Label>
-          <Select
+          <MySelect
             id='aggregate'
             name='aggregate'
             defaultValue={rest.aggregate}
@@ -120,7 +107,7 @@ const Nav = () => {
           >
             <option value='sum'>sum</option>
             <option value='mean'>mean</option>
-          </Select>
+          </MySelect>
         </FormGroup>
       </form>
     </nav>

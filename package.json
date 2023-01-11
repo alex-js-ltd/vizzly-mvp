@@ -37,6 +37,7 @@
     "react-apexcharts": "^1.4.0",
     "react-dom": "18.2.0",
     "react-icons": "^4.7.1",
+    "react-select": "^5.7.0",
     "session": "^0.1.0",
     "typescript": "^4.9.4"
   },

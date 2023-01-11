@@ -32,7 +32,7 @@ export default function Home() {
     <div>
       <ChartListUL>
         <ChartRow>
-          <BarChart data={data} dimensions={dimensions} />
+          <BarChart data={data} dimensions={dimensions} measure={measure} />
         </ChartRow>
 
         <ChartRow>

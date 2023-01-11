@@ -80,6 +80,10 @@ const LineChart = ({ data, dimensions, measure }: Props) => {
               show: false,
             },
           },
+
+          title: {
+            text: measure,
+          },
         },
       },
     ],

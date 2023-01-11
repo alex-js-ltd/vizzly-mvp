@@ -26,6 +26,21 @@ const DonutChart = ({ data, dimensions, measure }: Props) => {
     legend: {
       show: false,
     },
+
+    responsive: [
+      {
+        breakpoint: 991,
+        options: {
+          title: {
+            text: measure,
+          },
+
+          legend: {
+            show: true,
+          },
+        },
+      },
+    ],
   };
 
   return <Chart options={options} series={data} type='donut' width='100%' />;

@@ -2,9 +2,9 @@ import Chart from 'react-apexcharts';
 import type { ApexOptions } from 'apexcharts';
 import * as colors from 'styles/colors';
 
-type Props = { data?: number[]; dimensions?: string[] };
+type Props = { data?: number[]; dimensions?: string[]; measure: string };
 
-const BarChart = ({ data, dimensions }: Props) => {
+const BarChart = ({ data, dimensions, measure }: Props) => {
   if (!data || !dimensions) return null;
 
   const options: ApexOptions = {
@@ -57,6 +57,10 @@ const BarChart = ({ data, dimensions }: Props) => {
                 colors: [colors.text],
               },
             },
+          },
+
+          title: {
+            text: measure,
           },
         },
       },

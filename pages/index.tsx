@@ -21,7 +21,7 @@ const DonutChart = dynamic(() => import('../comps/donut-chart'), {
 export default function Home() {
   const { dimension, measure, aggregate, chartType } = useInput();
   const { data, dimensions, isError, error, isLoading } = useOrders(
-    dimension,
+    dimension[0],
     measure,
     aggregate,
     chartType

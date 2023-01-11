@@ -5,6 +5,7 @@ import {
   ReactNode,
   useContext,
 } from 'react';
+
 import * as mq from 'styles/media-queries';
 import * as colors from 'styles/colors';
 import { FormGroup, Select as MySelect, Label } from 'comps/lib';
@@ -122,8 +123,8 @@ export type Aggregate = 'sum' | 'mean';
 
 export type ChartType = 'bar' | 'line' | 'donut';
 
-type State = {
-  dimension: Dimension;
+export type State = {
+  dimension: Dimension[];
   measure: Measure;
   aggregate: Aggregate;
   chartType: ChartType;
@@ -136,7 +137,7 @@ const InputContext = createContext<Context | undefined>(undefined);
 
 const Input = ({ children }: { children: ReactNode }) => {
   const [state, setInput] = useState<State>({
-    dimension: 'category',
+    dimension: ['category'],
     measure: 'value',
     chartType: 'bar',
     aggregate: 'sum',
@@ -144,7 +145,15 @@ const Input = ({ children }: { children: ReactNode }) => {
 
   const { dimension, measure, aggregate, chartType } = state;
 
-  const value = { dimension, measure, aggregate, chartType, setInput };
+  const value = {
+    dimension,
+    measure,
+    aggregate,
+    chartType,
+    setInput,
+  };
+
+  console.log(dimension);
 
   return (
     <InputContext.Provider value={value}>{children}</InputContext.Provider>

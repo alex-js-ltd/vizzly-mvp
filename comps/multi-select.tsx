@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-
+import React, { useState, useEffect } from 'react';
 import Select, { ActionMeta, OnChangeValue, StylesConfig } from 'react-select';
+import { useInput } from './layout';
 
 const styles: StylesConfig<DimensionOption, true> = {
   control: (base, state) => {
@@ -45,8 +45,19 @@ const orderOptions = (values: readonly DimensionOption[]) => {
 
 const MultiSelect = () => {
   const [value, setValue] = useState<readonly DimensionOption[]>(
-    orderOptions([dimensionOptions[0]])
+    orderOptions(dimensionOptions)
   );
+
+  const input = useInput();
+
+  const { setInput, ...rest } = input;
+
+  useEffect(() => {
+    setInput({
+      ...rest,
+      dimension: value?.map((d) => d.value),
+    });
+  }, [value]);
 
   const onChange = (
     newValue: OnChangeValue<DimensionOption, true>,
@@ -69,6 +80,7 @@ const MultiSelect = () => {
 
   return (
     <Select
+      instanceId='select-dimension'
       value={value}
       isMulti
       styles={styles}
@@ -89,7 +101,6 @@ export interface DimensionOption {
   readonly label: string;
   readonly color: string;
   readonly isFixed?: boolean;
-  readonly isDisabled?: boolean;
 }
 
 export const dimensionOptions: readonly DimensionOption[] = [

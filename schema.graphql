@@ -28,12 +28,7 @@ type Order {
 }
 
 type Query {
-  orders(
-    dimension: String
-    measure: String
-    aggregate: String!
-    chartType: String
-  ): OrderResolver
+  orders(dimension: String, measure: String, aggregate: String!): OrderResolver
 }
 
 type OrderResolver {

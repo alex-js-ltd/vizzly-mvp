@@ -133,13 +133,10 @@ export type Measure = 'value' | 'total' | 'qty_ordered';
 
 export type Aggregate = 'sum' | 'mean';
 
-export type ChartType = 'bar' | 'line' | 'donut';
-
 type State = {
   dimension: Dimension;
   measure: Measure;
   aggregate: Aggregate;
-  chartType: ChartType;
 };
 
 type Context = State & {
@@ -151,13 +148,13 @@ const Input = ({ children }: { children: ReactNode }) => {
   const [state, setInput] = useState<State>({
     dimension: 'category',
     measure: 'value',
-    chartType: 'bar',
+
     aggregate: 'sum',
   });
 
-  const { dimension, measure, aggregate, chartType } = state;
+  const { dimension, measure, aggregate } = state;
 
-  const value = { dimension, measure, aggregate, chartType, setInput };
+  const value = { dimension, measure, aggregate, setInput };
 
   return (
     <InputContext.Provider value={value}>{children}</InputContext.Provider>

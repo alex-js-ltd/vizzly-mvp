@@ -1,3 +1,4 @@
+import { Fragment } from 'react';
 import dynamic from 'next/dynamic';
 import { useOrders } from 'utils/hooks.client';
 import type { ReactElement } from 'react';
@@ -19,22 +20,32 @@ const DonutChart = dynamic(() => import('../comps/donut-chart'), {
 });
 
 export default function Home() {
-  const { dimension, measure, aggregate, chartType } = useInput();
+  const { dimension, measure, aggregate } = useInput();
   const { data, dimensions, isError, error, isLoading } = useOrders(
     dimension,
     measure,
-    aggregate,
-    chartType
+    aggregate
   );
 
   return (
-    <Grid>
-      <BarChart data={data} dimensions={dimensions} />
+    <Fragment>
+      <Grid>
+        <BarChart data={data} dimensions={dimensions} />
 
-      <DonutChart data={data} dimensions={dimensions} measure={measure} />
+        <DonutChart data={data} dimensions={dimensions} measure={measure} />
 
-      <LineChart data={data} dimensions={dimensions} measure={measure} />
-    </Grid>
+        <LineChart data={data} dimensions={dimensions} measure={measure} />
+      </Grid>
+
+      {isError ? (
+        <div css={{ color: colors.danger }}>
+          <p>There was an error:</p>
+          <pre>{error.message}</pre>
+        </div>
+      ) : null}
+
+      {isLoading ? <Spinner /> : null}
+    </Fragment>
   );
 }
 

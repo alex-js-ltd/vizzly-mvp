@@ -59,7 +59,6 @@ export type Query = {
 
 export type QueryOrdersArgs = {
   aggregate: Scalars['String'];
-  chartType?: InputMaybe<Scalars['String']>;
   dimension?: InputMaybe<Scalars['String']>;
   measure?: InputMaybe<Scalars['String']>;
 };

@@ -62,7 +62,7 @@ const LineChart = ({ data, dimensions, measure }: Props) => {
     },
   };
   return (
-    <div css={{ gridArea: 'line', width: '50%' }}>
+    <div css={{ width: '50%' }}>
       <Chart options={options} series={series} type='line' width='100%' />
     </div>
   );

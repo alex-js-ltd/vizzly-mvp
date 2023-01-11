@@ -32,9 +32,9 @@ export default function Home() {
       <Grid>
         <BarChart data={data} dimensions={dimensions} />
 
-        <DonutChart data={data} dimensions={dimensions} measure={measure} />
-
         <LineChart data={data} dimensions={dimensions} measure={measure} />
+
+        <DonutChart data={data} dimensions={dimensions} measure={measure} />
       </Grid>
 
       {isError ? (

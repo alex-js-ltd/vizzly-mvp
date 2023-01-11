@@ -1,5 +1,6 @@
 import Chart from 'react-apexcharts';
 import type { ApexOptions } from 'apexcharts';
+import * as colors from 'styles/colors';
 
 type Props = { data?: number[]; dimensions?: string[]; measure: string };
 
@@ -60,6 +61,28 @@ const LineChart = ({ data, dimensions, measure }: Props) => {
         stops: [0, 100, 100, 100],
       },
     },
+
+    responsive: [
+      {
+        breakpoint: 991,
+        options: {
+          yaxis: {
+            labels: {
+              show: true,
+              style: {
+                colors: [colors.text],
+              },
+            },
+          },
+
+          xaxis: {
+            labels: {
+              show: false,
+            },
+          },
+        },
+      },
+    ],
   };
   return (
     <div css={{ width: '50%' }}>

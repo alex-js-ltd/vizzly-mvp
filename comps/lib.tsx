@@ -62,6 +62,7 @@ const Grid = styled.div({
   display: 'flex',
   flexDirection: 'row',
   flexWrap: 'wrap',
+  justifyContent: 'space-between',
 });
 
 export { Spinner, FormGroup, Select, Label, Grid };

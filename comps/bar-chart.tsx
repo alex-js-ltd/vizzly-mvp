@@ -70,7 +70,7 @@ const BarChart = ({ data, dimensions }: Props) => {
   ];
 
   return (
-    <div css={{ width: '50%' }}>
+    <div css={{ width: '100%' }}>
       <Chart options={options} series={series} type='bar' width='100%' />
     </div>
   );

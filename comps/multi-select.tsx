@@ -3,8 +3,29 @@ import React, { useState } from 'react';
 import Select, { ActionMeta, OnChangeValue, StylesConfig } from 'react-select';
 
 const styles: StylesConfig<DimensionOption, true> = {
+  control: (base, state) => {
+    return { ...base, overflow: 'auto' };
+  },
+
+  valueContainer: (base, state) => {
+    return {
+      ...base,
+      display: 'flex',
+      flexDirection: 'row',
+      flexWrap: 'nowrap',
+      height: 42,
+      width: 138,
+      overflow: 'scroll',
+    };
+  },
+
   multiValue: (base, state) => {
-    return state.data.isFixed ? { ...base, backgroundColor: 'gray' } : base;
+    return {
+      ...base,
+      backgroundColor: 'gray',
+      width: 'fit-content',
+      flexShrink: 0,
+    };
   },
   multiValueLabel: (base, state) => {
     return state.data.isFixed

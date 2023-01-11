@@ -37,27 +37,16 @@ const styles: StylesConfig<DimensionOption, true> = {
   },
 };
 
-const orderOptions = (values: readonly DimensionOption[]) => {
+export const orderOptions = (values: readonly DimensionOption[]) => {
   return values
     .filter((v) => v.isFixed)
     .concat(values.filter((v) => !v.isFixed));
 };
 
 const MultiSelect = () => {
-  const [value, setValue] = useState<readonly DimensionOption[]>(
-    orderOptions(dimensionOptions)
-  );
-
   const input = useInput();
 
   const { setInput, ...rest } = input;
-
-  useEffect(() => {
-    setInput({
-      ...rest,
-      dimension: value?.map((d) => d.value),
-    });
-  }, [value]);
 
   const onChange = (
     newValue: OnChangeValue<DimensionOption, true>,
@@ -75,16 +64,19 @@ const MultiSelect = () => {
         break;
     }
 
-    setValue(orderOptions(newValue));
+    setInput({
+      ...rest,
+      dimensionOption: orderOptions(newValue),
+    });
   };
 
   return (
     <Select
       instanceId='select-dimension'
-      value={value}
+      value={rest.dimensionOption}
       isMulti
       styles={styles}
-      isClearable={value.some((v) => !v.isFixed)}
+      isClearable={rest.dimensionOption.some((v) => !v.isFixed)}
       name='colors'
       className='basic-multi-select'
       classNamePrefix='select'

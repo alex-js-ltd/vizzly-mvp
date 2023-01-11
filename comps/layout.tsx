@@ -9,7 +9,12 @@ import {
 import * as mq from 'styles/media-queries';
 import * as colors from 'styles/colors';
 import { FormGroup, Select as MySelect, Label } from 'comps/lib';
-import { MultiSelect } from './multi-select';
+import {
+  MultiSelect,
+  dimensionOptions,
+  DimensionOption,
+  orderOptions,
+} from './multi-select';
 
 const Layout = ({ children }: { children: ReactElement }) => {
   return (
@@ -115,8 +120,6 @@ const Nav = () => {
   );
 };
 
-export type Dimension = 'category' | 'payment_method' | 'month';
-
 export type Measure = 'value' | 'total' | 'qty_ordered';
 
 export type Aggregate = 'sum' | 'mean';
@@ -124,7 +127,7 @@ export type Aggregate = 'sum' | 'mean';
 export type ChartType = 'bar' | 'line' | 'donut';
 
 export type State = {
-  dimension: Dimension[];
+  dimensionOption: DimensionOption[];
   measure: Measure;
   aggregate: Aggregate;
   chartType: ChartType;
@@ -132,28 +135,30 @@ export type State = {
 
 type Context = State & {
   setInput: Function;
+  dimensionInput: string[];
 };
 const InputContext = createContext<Context | undefined>(undefined);
 
 const Input = ({ children }: { children: ReactNode }) => {
   const [state, setInput] = useState<State>({
-    dimension: ['category'],
+    dimensionOption: orderOptions(dimensionOptions),
     measure: 'value',
     chartType: 'bar',
     aggregate: 'sum',
   });
 
-  const { dimension, measure, aggregate, chartType } = state;
+  const { dimensionOption, measure, aggregate, chartType } = state;
 
   const value = {
-    dimension,
+    dimensionOption,
+    dimensionInput: dimensionOption.map((d) => d.value),
     measure,
     aggregate,
     chartType,
     setInput,
   };
 
-  console.log(dimension);
+  console.log(value.dimensionInput);
 
   return (
     <InputContext.Provider value={value}>{children}</InputContext.Provider>

@@ -1,23 +1,30 @@
 import { req } from './request.client';
 import { useQuery } from '@tanstack/react-query';
 import { graphql } from 'generated/gql';
-import { ChartType, Dimension, Measure, Aggregate } from 'comps/layout';
+import { ChartType, Measure, Aggregate } from 'comps/layout';
 
 export { useOrders };
 
 const useOrders = (
-  dimension: Dimension,
+  dimensionInput: string[],
   measure: Measure,
   aggregate: Aggregate,
   chartType: ChartType
 ) => {
+  const dimension = dimensionInput[0];
+
   const result = useQuery<
     { orders: { data: number[]; dimensions: string[] } },
     Error
   >({
     queryKey: ['orders', dimension, measure, aggregate, chartType],
     queryFn: () =>
-      req(ordersQueryDocument, { dimension, measure, aggregate, chartType }),
+      req(ordersQueryDocument, {
+        dimension,
+        measure,
+        aggregate,
+        chartType,
+      }),
   });
 
   return {

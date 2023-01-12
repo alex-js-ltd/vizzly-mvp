@@ -15,6 +15,12 @@ export type Scalars = {
   Float: number;
 };
 
+export enum Measure {
+  QtyOrdered = 'qty_ordered',
+  Total = 'total',
+  Value = 'value'
+}
+
 export type Order = {
   __typename?: 'Order';
   bi_st: Scalars['String'];
@@ -59,9 +65,16 @@ export type Query = {
 
 export type QueryOrdersArgs = {
   aggregate: Scalars['String'];
-  dimension?: InputMaybe<Scalars['String']>;
-  measure?: InputMaybe<Scalars['String']>;
+  dimension?: InputMaybe<DimensionKey>;
+  measure?: InputMaybe<Measure>;
 };
+
+export enum DimensionKey {
+  Category = 'category',
+  Month = 'month',
+  PaymentMethod = 'payment_method',
+  Region = 'region'
+}
 
 
 
@@ -135,10 +148,12 @@ export type ResolversTypes = {
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
   Float: ResolverTypeWrapper<Scalars['Float']>;
   Int: ResolverTypeWrapper<Scalars['Int']>;
+  Measure: Measure;
   Order: ResolverTypeWrapper<PrismaOrder>;
   OrderResolver: ResolverTypeWrapper<OrderResolver>;
   Query: ResolverTypeWrapper<{}>;
   String: ResolverTypeWrapper<Scalars['String']>;
+  dimensionKey: DimensionKey;
 };
 
 /** Mapping between all available schema types and the resolvers parents */

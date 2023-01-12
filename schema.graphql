@@ -28,10 +28,27 @@ type Order {
 }
 
 type Query {
-  orders(dimension: String, measure: String, aggregate: String!): OrderResolver
+  orders(
+    dimension: dimensionKey
+    measure: Measure
+    aggregate: String!
+  ): OrderResolver
 }
 
 type OrderResolver {
   data: [Int]
   dimensions: [String]
+}
+
+enum dimensionKey {
+  category
+  payment_method
+  month
+  region
+}
+
+enum Measure {
+  value
+  total
+  qty_ordered
 }

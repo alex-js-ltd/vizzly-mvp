@@ -83,6 +83,7 @@ const Nav = () => {
             <option value='category'>category</option>
             <option value='payment_method'>payment</option>
             <option value='month'>month</option>
+            <option value='region'>region</option>
           </Select>
         </FormGroup>
 
@@ -127,7 +128,7 @@ const Nav = () => {
   );
 };
 
-export type Dimension = 'category' | 'payment_method' | 'month';
+export type Dimension = 'category' | 'payment_method' | 'month' | 'region';
 
 export type Measure = 'value' | 'total' | 'qty_ordered';
 
@@ -148,7 +149,6 @@ const Input = ({ children }: { children: ReactNode }) => {
   const [state, setInput] = useState<State>({
     dimension: 'category',
     measure: 'value',
-
     aggregate: 'sum',
   });
 

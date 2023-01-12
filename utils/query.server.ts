@@ -19,13 +19,18 @@ const Query: QueryResolvers = {
 
 export default Query;
 
-type Dimensions = { category: string; payment_method: string; month: string };
+export enum DimensionKey {
+  category = 'category',
+  payment_method = 'payment_method',
+  month = 'month',
+  region = 'region',
+}
 
-export type DimensionKey = keyof Dimensions;
-
-type Measure = { value: number; total: string; qty_ordered: string };
-
-export type MeasureKey = keyof Measure;
+export enum MeasureKey {
+  value = 'value',
+  total = 'total',
+  qty_ordered = 'qty_ordered',
+}
 
 const getOrders = (
   orders: Order[],

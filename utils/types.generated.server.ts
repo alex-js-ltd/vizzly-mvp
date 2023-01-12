@@ -1,7 +1,7 @@
 import { GraphQLResolveInfo } from 'graphql';
 import { PrismaOrder, Context } from 'pages/api/graphql';
 export type Maybe<T> = T | null;
-export type InputMaybe<T> = utils/query.server#CatKey | T;
+export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
 export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
 export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
@@ -15,10 +15,15 @@ export type Scalars = {
   Float: number;
 };
 
+export enum Aggregate {
+  mean = 'mean',
+  sum = 'sum'
+}
+
 export enum Measure {
-  QtyOrdered = 'qty_ordered',
-  Total = 'total',
-  Value = 'value'
+  qty_ordered = 'qty_ordered',
+  total = 'total',
+  value = 'value'
 }
 
 export type Order = {
@@ -64,16 +69,16 @@ export type Query = {
 
 
 export type QueryOrdersArgs = {
-  aggregate: Scalars['String'];
-  dimension?: InputMaybe<DimensionKey>;
-  measure?: InputMaybe<Measure>;
+  aggregate: Aggregate;
+  dimension: DimensionKey;
+  measure: Measure;
 };
 
 export enum DimensionKey {
-  Category = 'category',
-  Month = 'month',
-  PaymentMethod = 'payment_method',
-  Region = 'region'
+  category = 'category',
+  month = 'month',
+  payment_method = 'payment_method',
+  region = 'region'
 }
 
 
@@ -145,6 +150,7 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 
 /** Mapping between all available schema types and the resolvers types */
 export type ResolversTypes = {
+  Aggregate: Aggregate;
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
   Float: ResolverTypeWrapper<Scalars['Float']>;
   Int: ResolverTypeWrapper<Scalars['Int']>;
@@ -204,7 +210,7 @@ export type OrderResolverResolvers<ContextType = Context, ParentType extends Res
 };
 
 export type QueryResolvers<ContextType = Context, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
-  orders?: Resolver<Maybe<ResolversTypes['OrderResolver']>, ParentType, ContextType, RequireFields<QueryOrdersArgs, 'aggregate'>>;
+  orders?: Resolver<Maybe<ResolversTypes['OrderResolver']>, ParentType, ContextType, RequireFields<QueryOrdersArgs, 'aggregate' | 'dimension' | 'measure'>>;
 };
 
 export type Resolvers<ContextType = Context> = {

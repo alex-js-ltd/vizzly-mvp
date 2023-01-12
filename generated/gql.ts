@@ -13,7 +13,7 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  * Therefore it is highly recommended to use the babel-plugin for production.
  */
 const documents = {
-    "\n  query orders(\n    $aggregate: String!\n    $dimension: dimensionKey\n    $measure: Measure\n  ) {\n    orders(aggregate: $aggregate, dimension: $dimension, measure: $measure) {\n      data\n      dimensions\n    }\n  }\n": types.OrdersDocument,
+    "\n  query orders(\n    $dimension: dimensionKey!\n    $measure: Measure!\n    $aggregate: Aggregate!\n  ) {\n    orders(dimension: $dimension, measure: $measure, aggregate: $aggregate) {\n      data\n      dimensions\n    }\n  }\n": types.OrdersDocument,
 };
 
 /**
@@ -33,7 +33,7 @@ export function graphql(source: string): unknown;
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "\n  query orders(\n    $aggregate: String!\n    $dimension: dimensionKey\n    $measure: Measure\n  ) {\n    orders(aggregate: $aggregate, dimension: $dimension, measure: $measure) {\n      data\n      dimensions\n    }\n  }\n"): (typeof documents)["\n  query orders(\n    $aggregate: String!\n    $dimension: dimensionKey\n    $measure: Measure\n  ) {\n    orders(aggregate: $aggregate, dimension: $dimension, measure: $measure) {\n      data\n      dimensions\n    }\n  }\n"];
+export function graphql(source: "\n  query orders(\n    $dimension: dimensionKey!\n    $measure: Measure!\n    $aggregate: Aggregate!\n  ) {\n    orders(dimension: $dimension, measure: $measure, aggregate: $aggregate) {\n      data\n      dimensions\n    }\n  }\n"): (typeof documents)["\n  query orders(\n    $dimension: dimensionKey!\n    $measure: Measure!\n    $aggregate: Aggregate!\n  ) {\n    orders(dimension: $dimension, measure: $measure, aggregate: $aggregate) {\n      data\n      dimensions\n    }\n  }\n"];
 
 export function graphql(source: string) {
   return (documents as any)[source] ?? {};

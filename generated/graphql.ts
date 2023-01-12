@@ -14,6 +14,11 @@ export type Scalars = {
   Float: number;
 };
 
+export enum Aggregate {
+  Mean = 'mean',
+  Sum = 'sum'
+}
+
 export enum Measure {
   QtyOrdered = 'qty_ordered',
   Total = 'total',
@@ -63,9 +68,9 @@ export type Query = {
 
 
 export type QueryOrdersArgs = {
-  aggregate: Scalars['String'];
-  dimension?: InputMaybe<DimensionKey>;
-  measure?: InputMaybe<Measure>;
+  aggregate: Aggregate;
+  dimension: DimensionKey;
+  measure: Measure;
 };
 
 export enum DimensionKey {
@@ -76,13 +81,13 @@ export enum DimensionKey {
 }
 
 export type OrdersQueryVariables = Exact<{
-  aggregate: Scalars['String'];
-  dimension?: InputMaybe<DimensionKey>;
-  measure?: InputMaybe<Measure>;
+  dimension: DimensionKey;
+  measure: Measure;
+  aggregate: Aggregate;
 }>;
 
 
 export type OrdersQuery = { __typename?: 'Query', orders?: { __typename?: 'OrderResolver', data?: Array<number | null> | null, dimensions?: Array<string | null> | null } | null };
 
 
-export const OrdersDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"orders"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"aggregate"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"dimension"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"dimensionKey"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"measure"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Measure"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"orders"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"aggregate"},"value":{"kind":"Variable","name":{"kind":"Name","value":"aggregate"}}},{"kind":"Argument","name":{"kind":"Name","value":"dimension"},"value":{"kind":"Variable","name":{"kind":"Name","value":"dimension"}}},{"kind":"Argument","name":{"kind":"Name","value":"measure"},"value":{"kind":"Variable","name":{"kind":"Name","value":"measure"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"}},{"kind":"Field","name":{"kind":"Name","value":"dimensions"}}]}}]}}]} as unknown as DocumentNode<OrdersQuery, OrdersQueryVariables>;
+export const OrdersDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"orders"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"dimension"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"dimensionKey"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"measure"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Measure"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"aggregate"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Aggregate"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"orders"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"dimension"},"value":{"kind":"Variable","name":{"kind":"Name","value":"dimension"}}},{"kind":"Argument","name":{"kind":"Name","value":"measure"},"value":{"kind":"Variable","name":{"kind":"Name","value":"measure"}}},{"kind":"Argument","name":{"kind":"Name","value":"aggregate"},"value":{"kind":"Variable","name":{"kind":"Name","value":"aggregate"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"}},{"kind":"Field","name":{"kind":"Name","value":"dimensions"}}]}}]}}]} as unknown as DocumentNode<OrdersQuery, OrdersQueryVariables>;

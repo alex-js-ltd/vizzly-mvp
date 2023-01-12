@@ -147,7 +147,7 @@ const InputContext = createContext<Context | undefined>(undefined);
 
 const Input = ({ children }: { children: ReactNode }) => {
   const [state, setInput] = useState<State>({
-    dimension: 'category',
+    dimension: 'region',
     measure: 'value',
     aggregate: 'sum',
   });

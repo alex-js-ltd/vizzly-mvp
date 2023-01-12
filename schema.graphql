@@ -29,9 +29,9 @@ type Order {
 
 type Query {
   orders(
-    dimension: dimensionKey
-    measure: Measure
-    aggregate: String!
+    dimension: dimensionKey!
+    measure: Measure!
+    aggregate: Aggregate!
   ): OrderResolver
 }
 
@@ -51,4 +51,9 @@ enum Measure {
   value
   total
   qty_ordered
+}
+
+enum Aggregate {
+  sum
+  mean
 }

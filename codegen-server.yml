@@ -6,6 +6,7 @@ generates:
       - typescript-resolvers
     config:
       contextType: pages/api/graphql#Context
+      namingConvention:
+        enumValues: keep
       mappers:
         Order: pages/api/graphql#PrismaOrder
-      inputMaybeValue: utils/query.server#CatKey | T

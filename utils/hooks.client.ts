@@ -2,7 +2,7 @@ import { req } from './request.client';
 import { useQuery } from '@tanstack/react-query';
 import { graphql } from 'generated/gql';
 import type { Measure, Aggregate } from 'comps/layout';
-import type { DimensionKey } from './query.server';
+import type { DimensionKey } from 'utils/types.generated.server';
 
 export { useOrders };
 
@@ -28,11 +28,11 @@ const useOrders = (
 
 const ordersQueryDocument = graphql(/* GraphQL */ `
   query orders(
-    $aggregate: String!
-    $dimension: dimensionKey
-    $measure: Measure
+    $dimension: dimensionKey!
+    $measure: Measure!
+    $aggregate: Aggregate!
   ) {
-    orders(aggregate: $aggregate, dimension: $dimension, measure: $measure) {
+    orders(dimension: $dimension, measure: $measure, aggregate: $aggregate) {
       data
       dimensions
     }

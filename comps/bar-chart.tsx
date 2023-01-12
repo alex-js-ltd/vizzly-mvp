@@ -13,7 +13,10 @@ const BarChart = ({ data, dimensions, measure }: Props) => {
       toolbar: {
         show: false,
       },
+
+      updateOptions: {},
     },
+
     plotOptions: {
       bar: {
         borderRadius: 4,
